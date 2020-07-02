@@ -8,6 +8,15 @@ public class RoomVO {
     private Double price;
     private Integer curNum;
     private Integer total;
+    private Integer hotelId;
+
+    public Integer getHotelId() {
+        return hotelId;
+    }
+
+    public void setHotelId(Integer hotelId) {
+        this.hotelId = hotelId;
+    }
 
     public Integer getId() {
         return id;

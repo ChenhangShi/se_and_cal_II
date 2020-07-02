@@ -7,11 +7,12 @@
     </div>
 </template>
 <script>
-import Header from '@/components/header'
-export default {
-    name: 'layout',
-    components: {
-        Header
+    import Header from '@/components/header'
+
+    export default {
+        name: 'layout',
+        components: {
+            Header
+        }
     }
-}
 </script>

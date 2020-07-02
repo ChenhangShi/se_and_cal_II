@@ -1,28 +1,57 @@
+import user from "./modules/user";
+
 const getters = {
-  //user
-  token: state => state.user.token,
-  userId: state => state.user.userId,
-  userInfo: state => state.user.userInfo,
-  userOrderList: state => state.user.userOrderList,
-  hotelListLoading: state => state.hotel.hotelListLoading,
-  hotelList: state => state.hotel.hotelList,
-  currentHotelInfo: state => state.hotel.currentHotelInfo,
-  currentHotelId: state => state.hotel.currentHotelId,
-  orderModalVisible: state => state.hotel.orderModalVisible,
-  currentOrderRoom: state => state.hotel.currentOrderRoom,
-  orderMatchCouponList: state => state.hotel.orderMatchCouponList,
-  //admin
-  managerList: state => state.admin.managerList,
-  addManagerModalVisible: state => state.admin.addManagerModalVisible,
-  addManagerParams: state => state.admin.addManagerParams,
-  //hotelManager
-  orderList: state => state.hotelManager.orderList,
-  addHotelModalVisible: state => state.hotelManager.addHotelModalVisible,
-  addRoomModalVisible: state => state.hotelManager.addRoomModalVisible,
-  couponVisible: state => state.hotelManager.couponVisible,
-  addCouponVisible: state => state.hotelManager.addCouponVisible,
-  activeHotelId: state => state.hotelManager.activeHotelId,
-  couponList: state => state.hotelManager.couponList,
-  }
-  
-  export default getters
+    //user
+    token: state => state.user.token,
+    userId: state => state.user.userId,
+    userInfo: state => state.user.userInfo,
+    userOrderList: state => state.user.userOrderList,
+    hotelListLoading: state => state.hotel.hotelListLoading,
+    hotelList: state => state.hotel.hotelList,
+    currentHotelInfo: state => state.hotel.currentHotelInfo,
+    currentHotelId: state => state.hotel.currentHotelId,
+    orderModalVisible: state => state.hotel.orderModalVisible,
+    currentOrderRoom: state => state.hotel.currentOrderRoom,
+    orderMatchCouponList: state => state.hotel.orderMatchCouponList,
+    showOrderDetailModalVisible: state => state.user.showOrderDetailModalVisible,
+    currentOrder: state => state.user.currentOrder,
+    addCommentModalVisible: state => state.user.addCommentModalVisible,
+    hotelComments: state => state.hotel.hotelComments,
+    bizRegionList: state => state.hotel.bizRegionList,
+    memberInfo: state => state.user.memberInfo,
+    registerMemberModalVisible: state => state.user.registerMemberModalVisible,
+    roomListModalVisible: state => state.hotel.roomListModalVisible,
+    roomList: state => state.hotel.roomList,
+    userCreditRecord: state => state.user.userCreditRecord,
+    memberLevelInfo: state => state.user.memberLevelInfo,
+    //admin
+    managerList: state => state.admin.managerList,
+    salesmanList: state => state.admin.salesmanList,
+    addManagerModalVisible: state => state.admin.addManagerModalVisible,
+    addManagerParams: state => state.admin.addManagerParams,
+    addHotelModalVisible: state => state.admin.addHotelModalVisible,
+    normalUserList: state => state.admin.normalUserList,
+    //hotelManager
+    orderList: state => state.hotelManager.orderList,
+    addRoomModalVisible: state => state.hotelManager.addRoomModalVisible,
+    couponVisible: state => state.hotelManager.couponVisible,
+    addCouponVisible: state => state.hotelManager.addCouponVisible,
+    activeHotelId: state => state.hotelManager.activeHotelId,
+    couponList: state => state.hotelManager.couponList,
+    targetHotel: state => state.hotelManager.targetHotel,
+    targetHotelOrderList: state => state.hotelManager.targetHotelOrderList,
+    changeRoomNumModalVisible: state => state.hotelManager.changeRoomNumModalVisible,
+    //salesman
+    globalCouponList: state => state.salesman.globalCouponList,
+    unusualOrderList: state => state.salesman.unusualOrderList,
+    userList: state => state.salesman.userList,
+    selectRestoreMethodModalVisible: state => state.salesman.selectRestoreMethodModalVisible,
+    addCreditModalVisible: state => state.salesman.addCreditModalVisible,
+    addCooperativeCompanyVisible: state => state.hotelManager.addCooperativeCompanyVisible,
+    serviceVisible: state=>state.hotelManager.serviceVisible,
+    changeLevelRulesModalVisible: state => state.salesman.changeLevelRulesModalVisible,
+    addServiceVisible: state=>state.hotelManager.addServiceVisible,
+    allServicesList: state=>state.hotelManager.allServicesList,
+}
+
+export default getters

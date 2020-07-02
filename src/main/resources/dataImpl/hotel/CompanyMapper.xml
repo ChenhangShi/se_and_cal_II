@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.hotel.data.hotel.CompanyMapper">
+
+
+    <select id="getCooperativeCompanies" resultMap="Company">
+        select * from HotelCooperativeCompany where hotelId=#{hotelId}
+    </select>
+    <insert id="addCooperativeCompany" parameterType="com.example.hotel.po.HotelCooperativeCompany">
+        insert into HotelCooperativeCompany(hotelId,companyName)
+        values (#{hotelId},#{companyName})
+    </insert>
+    <delete id="deleteCooperativeCompany" parameterType="com.example.hotel.po.HotelCooperativeCompany">
+        delete from HotelCooperativeCompany where hotelId=#{hotelId} and companyName=#{companyName}
+    </delete>
+    <delete id="deleteCooperativeCompanyByHotel">
+        delete from HotelCooperativeCompany where hotelId=#{hotelId}
+    </delete>
+
+    <resultMap id="Company" type="com.example.hotel.po.HotelCooperativeCompany">
+    </resultMap>
+
+</mapper>

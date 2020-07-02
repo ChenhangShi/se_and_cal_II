@@ -1,6 +1,7 @@
 package com.example.hotel.enums;
 
 public enum BizRegion {
+/*
     XiDan("西单");
 
     private String value;
@@ -13,4 +14,8 @@ public enum BizRegion {
     public String toString() {
         return value;
     }
+ */
+    西单,
+    南京路,
+    浦东;
 }

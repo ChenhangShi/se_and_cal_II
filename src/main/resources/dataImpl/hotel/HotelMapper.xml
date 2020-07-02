@@ -3,8 +3,8 @@
 <mapper namespace="com.example.hotel.data.hotel.HotelMapper">
     <insert id="insertHotel" parameterType="com.example.hotel.po.Hotel"
     useGeneratedKeys="true" keyProperty="id">
-        insert into Hotel(address,bizRegion,hotelDescription,hotelStar,hotelName,phoneNum,rate,manager_id)
-        values (#{address},#{bizRegion},#{description},#{hotelStar},#{hotelName},#{phoneNum},#{rate},#{managerId})
+        insert into Hotel(address,bizRegion,hotelDescription,hotelStar,hotelName,phoneNum,rate,commentNum)
+        values (#{address},#{bizRegion},#{description},#{hotelStar},#{hotelName},#{phoneNum},#{rate},#{commentNum})
     </insert>
 
     <select id="selectAllHotel" resultMap="Hotel">
@@ -13,7 +13,36 @@
     <select id="selectById" resultMap="Hotel">
         select * from Hotel where id=#{id}
     </select>
+    <delete id="deleteHotel">
+        delete from Hotel where id=#{id}
+    </delete>
+    <select id="retrieveHotelByManager" resultMap="Hotel">
+        select * from Hotel where manager_id=#{managerId}
+    </select>
+    <update id="setHotelManager">
+        update Hotel set manager_id=#{managerId} where id=#{hotelId}
+    </update>
+    <update id="updateHotelRate">
+        update Hotel set rate=(rate*commentNum+#{rate})/(commentNum+1), commentNum=commentNum+1 where id=#{hotelId}
+    </update>
+    <update id="updateHotelInfo">
+        update Hotel set address=#{address},bizRegion=#{bizRegion},hotelDescription=#{description},hotelStar=#{hotelStar}
+        where id=#{id}
+    </update>
 
+    <select id="getHotelServices" resultMap="Service">
+        select * from Service where hotelId=#{hotelId}
+    </select>
+    <insert id="addService" parameterType="com.example.hotel.po.Service">
+        insert into Service(hotelId,hotelService)
+        values (#{hotelId},#{hotelService})
+    </insert>
+    <delete id="deleteService">
+        delete from Service where hotelId=#{hotelId} and hotelService=#{type}
+    </delete>
+    <delete id="deleteServiceByHotel">
+        delete from Service where hotelId=#{hotelId}
+    </delete>
 
     <resultMap id="Hotel" type="com.example.hotel.vo.HotelVO">
         <id column="id" property="id"></id>
@@ -25,8 +54,8 @@
         <result column="phoneNum" property="phoneNum"></result>
         <result column="rate" property="rate"></result>
         <result column="manager_id" property="managerId"></result>
-
     </resultMap>
+    <resultMap id="Service" type="com.example.hotel.po.Service"></resultMap>
 
 
 </mapper>

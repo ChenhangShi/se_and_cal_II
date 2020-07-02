@@ -26,4 +26,19 @@ public interface OrderMapper {
 
     Order getOrderById(@Param("orderid") int orderid);
 
+    int deleteOrderByHotel(@Param("hotelId") int hotelId);
+
+    int deleteOrder(@Param("orderid") Integer orderid);
+
+    int setOrderUnusual(@Param("orderid") int orderid);
+
+    int executeOrder(@Param("orderid") int orderid);
+
+    int finishOrder(@Param("orderid") int orderid);
+
+    int updateCheckOutDate(@Param("orderid") int orderid, @Param("checkOutDate") String checkOutDate);
+    int updateCheckInDate(@Param("orderid") int orderid, @Param("checkInDate") String checkInDate);
+    int setAnnualDate(@Param("orderid") int orderid, @Param("annualDate") String annualDate);
+
+    List<Order> getUnusualOrders();
 }

@@ -21,6 +21,7 @@ public class Order {
     private Double price;
     private String clientName;
     private String phoneNumber;
+    //订单状态有： 已预订，已撤销，已执行，已退房，异常
     private String orderState;
 
     public Integer getId() {

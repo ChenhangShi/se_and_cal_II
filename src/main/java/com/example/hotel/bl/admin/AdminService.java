@@ -19,11 +19,19 @@ public interface AdminService {
      */
     ResponseVO addManager(UserForm userForm);
 
+    ResponseVO addSalesman(UserForm userForm);
+
     /**
      * 获得所有酒店管理人员信息
      * @return
      */
     List<User> getAllManagers();
 
+    List<User> getAllSalesmen();
 
+    ResponseVO deleteManager(Integer managerId);
+
+    ResponseVO deleteSalesman(Integer salesmanId);
+
+    ResponseVO deleteUser(Integer userId);
 }

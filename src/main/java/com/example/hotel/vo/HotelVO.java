@@ -1,7 +1,9 @@
 package com.example.hotel.vo;
 
 import com.example.hotel.enums.BizRegion;
+import com.example.hotel.enums.HotelService;
 import com.example.hotel.enums.HotelStar;
+import com.example.hotel.po.HotelCooperativeCompany;
 import com.example.hotel.po.HotelRoom;
 import com.example.hotel.po.User;
 
@@ -17,8 +19,26 @@ public class HotelVO {
     private String description;
     private String phoneNum;
     private Integer managerId;
-
     private List<RoomVO> rooms;
+    private List<ServiceVO> services;
+
+    public List<ServiceVO> getServices() {
+        return services;
+    }
+
+    public void setServices(List<ServiceVO> services) {
+        this.services = services;
+    }
+
+    private List<HotelCooperativeCompany> cooperativeCompanies;
+
+    public List<HotelCooperativeCompany> getCooperativeCompanies() {
+        return cooperativeCompanies;
+    }
+
+    public void setCooperativeCompanies(List<HotelCooperativeCompany> cooperativeCompanies) {
+        this.cooperativeCompanies = cooperativeCompanies;
+    }
 
     public Integer getId() {
         return id;

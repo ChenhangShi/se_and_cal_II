@@ -13,6 +13,7 @@ public class Hotel {
     private BizRegion bizRegion;
     private HotelStar hotelStar;
     private Double rate;
+    private int commentNum;
     private String description;
     private String phoneNum;
     /**
@@ -90,6 +91,13 @@ public class Hotel {
 
     public void setManagerId(Integer managerId) {
         this.managerId = managerId;
+    }
+    public int getCommentNum() {
+        return commentNum;
+    }
+
+    public void setCommentNum(int commentNum) {
+        this.commentNum = commentNum;
     }
 }
 

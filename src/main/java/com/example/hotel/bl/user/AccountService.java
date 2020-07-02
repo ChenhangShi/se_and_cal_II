@@ -1,7 +1,10 @@
 package com.example.hotel.bl.user;
 
+import com.example.hotel.po.CreditRecord;
 import com.example.hotel.po.User;
 import com.example.hotel.vo.*;
+
+import java.util.List;
 
 /**
  * @author huwen
@@ -40,5 +43,13 @@ public interface AccountService {
      */
     ResponseVO updateUserInfo(int id, String password,String username,String phonenumber);
 
+    void updateUserCredit(int id,double credit);
 
+    User getAccountByName(String email);
+
+    List<User> getAllUsers();
+
+    ResponseVO addCredit(int userId, double amount);
+
+    List<CreditRecord> getUserCreditRecords(int userId);
 }

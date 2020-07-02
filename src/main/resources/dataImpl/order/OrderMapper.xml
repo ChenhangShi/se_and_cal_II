@@ -16,7 +16,36 @@
         select * from OrderList where id=#{orderid}
     </select>
    <!--取消订单的数据库操作-->
-
+    <update id="annulOrder">
+        update OrderList set orderState="已撤销" where id=#{orderid}
+    </update>
+    <delete id="deleteOrderByHotel">
+        delete from OrderList where hotelId=#{hotelId}
+    </delete>
+    <delete id="deleteOrder">
+        delete from OrderList where id=#{orderid}
+    </delete>
+    <update id="setOrderUnusual">
+        update OrderList set orderState="异常" where id=#{orderid}
+    </update>
+    <update id="executeOrder">
+        update OrderList set orderState="已执行" where id=#{orderid}
+    </update>
+    <update id="finishOrder">
+        update OrderList set orderState="已退房" where id=#{orderid}
+    </update>
+    <update id="updateCheckOutDate">
+        update OrderList set checkOutDate=#{checkOutDate} where id=#{orderid}
+    </update>
+    <update id="updateCheckInDate">
+        update OrderList set checkInDate=#{checkInDate} where id=#{orderid}
+    </update>
+    <update id="setAnnualDate">
+        update OrderList set createDate=#{annualDate} where id=#{orderid}
+    </update>
+    <select id="getUnusualOrders" resultMap="Order">
+        select * from OrderList where orderState="异常"
+    </select>
 
 
     <resultMap id="Order" type="com.example.hotel.po.Order">

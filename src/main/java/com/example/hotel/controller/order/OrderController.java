@@ -39,5 +39,38 @@ public class OrderController {
         return orderService.annulOrder(orderid);
     }
 
+    @GetMapping("/{hotelId}/allOrders")
+    public ResponseVO retrieveHotelOrders(@PathVariable Integer hotelId) {
+        return ResponseVO.buildSuccess(orderService.getHotelOrders(hotelId));
+    }
 
+    @PostMapping("/{orderid}/deleteOrder")
+    public ResponseVO deleteOrder(@PathVariable Integer orderid){
+        return orderService.deleteOrder(orderid);
+    }
+
+    //多余的，前端查看订单详情不用重新取
+    @GetMapping("/{orderid}/retrieveOrder")
+    public ResponseVO retrieveOrder(@PathVariable Integer orderid){
+        return ResponseVO.buildSuccess(orderService.retrieveOrder(orderid));
+    }
+
+    @PostMapping("/{orderid}/executeOrder")
+    public ResponseVO executeOrder(@PathVariable int orderid){
+        return orderService.executeOrder(orderid);
+    }
+    @PostMapping("/{orderid}/finishOrder")
+    public ResponseVO finishOrder(@PathVariable int orderid){
+        return orderService.finishOrder(orderid);
+    }
+
+    @GetMapping("/getUnusualOrders")
+    public ResponseVO getUnusualOrders(){
+        return ResponseVO.buildSuccess(orderService.getUnusualOrders());
+    }
+
+    @PostMapping("/{orderid}/annualUnusualOrder")
+    public ResponseVO annualUnusualOrder(@PathVariable int orderid, @RequestParam String restoreMethod){
+        return orderService.annualUnusualOrder(orderid,restoreMethod);
+    }
 }

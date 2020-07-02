@@ -6,6 +6,7 @@ public class CouponVO {
     private Integer status;
     private String name;
     private Integer type;
+    private Integer hotelId;
 
     public Integer getId() {
         return id;
@@ -45,5 +46,13 @@ public class CouponVO {
 
     public void setType(Integer type) {
         this.type = type;
+    }
+
+    public Integer getHotelId() {
+        return hotelId;
+    }
+
+    public void setHotelId(Integer hotelId) {
+        this.hotelId = hotelId;
     }
 }

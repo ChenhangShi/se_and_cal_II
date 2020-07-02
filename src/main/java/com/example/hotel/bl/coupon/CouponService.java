@@ -1,9 +1,8 @@
 package com.example.hotel.bl.coupon;
 
 import com.example.hotel.po.Coupon;
-import com.example.hotel.vo.CouponVO;
-import com.example.hotel.vo.HotelTargetMoneyCouponVO;
-import com.example.hotel.vo.OrderVO;
+import com.example.hotel.util.ServiceException;
+import com.example.hotel.vo.*;
 
 import java.util.List;
 
@@ -28,4 +27,10 @@ public interface CouponService {
      * @return
      */
     CouponVO addHotelTargetMoneyCoupon(HotelTargetMoneyCouponVO couponVO);
+    ResponseVO addTimeCoupon(TimeCouponVO timeCouponVO);
+    ResponseVO addTargetRoomCoupon(TargetRoomCouponVO targetRoomCouponVO);
+    ResponseVO addBirthdayCoupon(BirthdayCouponVO birthdayCouponVO);
+    ResponseVO addCompanyCoupon(CompanyCouponVO companyCouponVO);
+
+    void deleteCouponByHotel(Integer hotelId) throws ServiceException;
 }

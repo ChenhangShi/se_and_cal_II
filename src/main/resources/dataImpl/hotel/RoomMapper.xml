@@ -12,14 +12,31 @@
         select * from Room where hotel_id=#{hotelId}
     </select>
 
+    <select id="retrieveRoom" resultMap="room">
+        select * from Room where hotel_id=#{hotelId} and roomType=#{roomType}
+    </select>
+
     <update id="updateRoomInfo">
         update Room set curNum=curNum-#{curNum} where hotel_id=#{hotelId} and roomType=#{roomType}
+    </update>
+    <update id="updateRoomPrice">
+        update Room set price=#{price} where hotel_id=#{hotelId} and roomType=#{roomType}
+    </update>
+    <update id="updateRoomTotal">
+        update Room set total=total-#{rooms} where hotel_id=#{hotelId} and roomType=#{roomType}
     </update>
 
     <select id="getRoomCurNum" resultType="int">
         select curNum from Room where hotel_id=#{hotelId} and roomType=#{roomType}
     </select>
 
+    <delete id="deleteRoomByHotel">
+        delete from Room where hotel_id=#{hotelId}
+    </delete>
+
+    <select id="getAllRooms" resultMap="room">
+        select * from Room
+    </select>
 
     <resultMap id="room" type="com.example.hotel.po.HotelRoom">
         <id column="id" property="id"></id>

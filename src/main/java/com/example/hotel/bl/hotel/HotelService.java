@@ -1,10 +1,14 @@
 package com.example.hotel.bl.hotel;
 
+import com.example.hotel.po.HotelCooperativeCompany;
 import com.example.hotel.po.HotelRoom;
 import com.example.hotel.po.Order;
+import com.example.hotel.po.Service;
 import com.example.hotel.util.ServiceException;
-import com.example.hotel.vo.CouponVO;
-import com.example.hotel.vo.HotelVO;
+import com.example.hotel.vo.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -24,7 +28,7 @@ public interface HotelService {
      * @param roomType
      * @param rooms
      */
-    void updateRoomInfo(Integer hotelId, String roomType,Integer rooms);
+    ResponseVO updateRoomInfo(Integer hotelId, String roomType,Integer rooms);
 
     /**
      * 列表获取酒店信息
@@ -47,12 +51,37 @@ public interface HotelService {
      */
     int getRoomCurNum(Integer hotelId,String roomType);
 
-    /**
-     * 查看酒店的所有订单
-     * @param hotelId
-     * @return
-     */
-    List<Order> getHotelOrders(Integer hotelId);
+    ResponseVO deleteHotel(Integer hotelId);
 
+    HotelVO retrieveHotelByManager(Integer managerId);
 
+    void setHotelRooms(int hotelId, HotelVO hotelVO);
+
+    ResponseVO setHotelManager(Integer hotelId,Integer managerId);
+
+    void updateHotelRate(int hotelId, double rate) throws Exception;
+
+    List<String> getAllBizRegions();
+
+    ResponseVO updateHotelInfo(HotelVO hotelVO);
+
+    ResponseVO addCooperativeCompany(HotelCooperativeCompanyVO hotelCooperativeCompanyVO);
+
+    ResponseVO deleteCooperativeCompany(HotelCooperativeCompanyVO hotelCooperativeCompanyVO);
+
+    List<HotelCooperativeCompany> getCooperativeCompanies(int hotelId);
+
+    List<RoomVO> getAllRooms();
+
+    void deleteCooperativeCompanyByHotel(int hotelId);
+
+    List<String> getAllServices();
+
+    List<ServiceVO> getHotelServices(int hotelId);
+
+    ResponseVO addService(int hotelId, String type);
+
+    ResponseVO deleteService(int hotelId, String type);
+
+    void deleteServiceByHotel(int hotelId);
 }
