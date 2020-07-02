@@ -1,8 +1,8 @@
-package com.example.hotel.blImpl.comment;
+package com.example.hotel.blImpl.hotel;
 
-import com.example.hotel.bl.comment.CommentService;
+import com.example.hotel.bl.hotel.CommentService;
 import com.example.hotel.bl.hotel.HotelService;
-import com.example.hotel.data.comment.CommentMapper;
+import com.example.hotel.data.hotel.CommentMapper;
 import com.example.hotel.po.Comment;
 import com.example.hotel.vo.CommentVO;
 import com.example.hotel.vo.ResponseVO;

@@ -29,8 +29,6 @@ public class AccountServiceImpl implements AccountService {
     private AccountMapper accountMapper;
     @Autowired
     private RecordService recordService;
-    @Autowired
-    private MemberService memberService;
 
     @Override
     public ResponseVO registerAccount(UserVO userVO) {

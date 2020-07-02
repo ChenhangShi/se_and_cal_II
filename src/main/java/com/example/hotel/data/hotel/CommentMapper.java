@@ -1,4 +1,4 @@
-package com.example.hotel.data.comment;
+package com.example.hotel.data.hotel;
 
 import com.example.hotel.po.Comment;
 import org.apache.ibatis.annotations.Mapper;

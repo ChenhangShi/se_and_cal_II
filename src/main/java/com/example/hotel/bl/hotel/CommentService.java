@@ -1,4 +1,4 @@
-package com.example.hotel.bl.comment;
+package com.example.hotel.bl.hotel;
 
 import com.example.hotel.po.Comment;
 import com.example.hotel.vo.CommentVO;
