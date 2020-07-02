@@ -20,7 +20,7 @@ public class OrderController {
     private OrderService orderService;
 
     @PostMapping("/addOrder")
-    public ResponseVO reserveHotel(@RequestBody OrderVO orderVO){
+    public ResponseVO addOrder(@RequestBody OrderVO orderVO){
         return orderService.addOrder(orderVO);
     }
 
