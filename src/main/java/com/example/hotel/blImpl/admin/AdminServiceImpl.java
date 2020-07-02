@@ -10,6 +10,7 @@ import com.example.hotel.enums.UserType;
 import com.example.hotel.po.Hotel;
 import com.example.hotel.po.Order;
 import com.example.hotel.po.User;
+import com.example.hotel.util.Methods;
 import com.example.hotel.vo.HotelVO;
 import com.example.hotel.vo.ResponseVO;
 import com.example.hotel.vo.UserForm;
@@ -46,7 +47,8 @@ public class AdminServiceImpl implements AdminService {
         try{
             User user = new User();
             user.setEmail(userForm.getEmail());
-            user.setPassword(userForm.getPassword());
+            // md5加密密码
+            user.setPassword(Methods.md5Encryption(userForm.getPassword()));
             user.setUserType(UserType.HotelManager);
             adminMapper.addManagerAndSalesMan(user);
             managerId = accountService.getAccountByName(userForm.getEmail()).getId();
@@ -61,7 +63,8 @@ public class AdminServiceImpl implements AdminService {
     public ResponseVO addSalesman(UserForm userForm) {
         User user = new User();
         user.setEmail(userForm.getEmail());
-        user.setPassword(userForm.getPassword());
+        // md5加密密码
+        user.setPassword(Methods.md5Encryption(userForm.getPassword()));
         user.setUserType(UserType.Salesman);
         try {
             adminMapper.addManagerAndSalesMan(user);

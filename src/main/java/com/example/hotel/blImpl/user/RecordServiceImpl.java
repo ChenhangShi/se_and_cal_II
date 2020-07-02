@@ -7,6 +7,7 @@ import com.example.hotel.bl.user.RecordService;
 import com.example.hotel.data.user.RecordMapper;
 import com.example.hotel.po.CreditRecord;
 import com.example.hotel.po.User;
+import com.example.hotel.util.Methods;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -39,7 +40,7 @@ public class RecordServiceImpl implements RecordService {
             creditRecord.setAction(action);
             creditRecord.setChange(change);
             creditRecord.setResult(user.getCredit());
-            creditRecord.setTime(OrderService.getNowStr());
+            creditRecord.setTime(Methods.getNowStr());
             recordMapper.addCreditRecord(creditRecord);
         }catch (Exception e){
             System.out.println(e.getMessage());

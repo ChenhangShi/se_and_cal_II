@@ -173,7 +173,7 @@ DROP TABLE IF EXISTS `User`;
 CREATE TABLE `User` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `email` varchar(255) DEFAULT NULL UNIQUE,
-  `password` varchar(11) NOT NULL,
+  `password` varchar(255) NOT NULL,
   `username` varchar(255) DEFAULT NULL,
   `phonenumber` varchar(255) DEFAULT NULL,
   `credit` double(255,2) DEFAULT 0,
@@ -188,7 +188,7 @@ CREATE TABLE `User` (
 
 BEGIN;
 /*!40000 ALTER TABLE `User` DISABLE KEYS */;
-INSERT INTO `User` VALUES (4,'1012681@qq.com','123456','测试一号','12345678919',100,'Client'),(5,'123@qq.com','123456','测试二号','12345678911',100,'Client'),(6,'333@qq.com','123456',NULL,NULL,0,'HotelManager'),(7,'1@qq.com','123456','系统管理员',NULL,0,'Admin');
+INSERT INTO `User` VALUES (5,'123@qq.com','4QrcOUm6Wau+VuBX8g+IPg==','测试二号','12345678911',100,'Client'),(6,'333@qq.com','4QrcOUm6Wau+VuBX8g+IPg==',NULL,NULL,0,'HotelManager'),(7,'1@qq.com','4QrcOUm6Wau+VuBX8g+IPg==','系统管理员',NULL,0,'Admin');
 /*!40000 ALTER TABLE `User` ENABLE KEYS */;
 COMMIT;
 

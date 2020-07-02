@@ -7,6 +7,7 @@ import com.example.hotel.bl.user.RecordService;
 import com.example.hotel.data.user.AccountMapper;
 import com.example.hotel.po.CreditRecord;
 import com.example.hotel.po.User;
+import com.example.hotel.util.Methods;
 import com.example.hotel.vo.UserForm;
 import com.example.hotel.vo.ResponseVO;
 import com.example.hotel.vo.UserVO;
@@ -36,6 +37,8 @@ public class AccountServiceImpl implements AccountService {
         User user = new User();
         BeanUtils.copyProperties(userVO,user);
         try {
+            // md5加密密码
+            user.setPassword(Methods.md5Encryption(user.getPassword()));
             accountMapper.createNewAccount(user);
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -47,7 +50,8 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public User login(UserForm userForm) {
         User user = accountMapper.getAccountByName(userForm.getEmail());
-        if (null == user || !user.getPassword().equals(userForm.getPassword())) {
+        // 如果没有这个用户 或者md5后的密码和数据库中的不同
+        if (null == user || !user.getPassword().equals(Methods.md5Encryption(userForm.getPassword()))) {
             return null;
         }
         /*
@@ -71,6 +75,8 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public ResponseVO updateUserInfo(int id, String password, String username, String phonenumber) {
         try {
+            // md5加密密码
+            password = Methods.md5Encryption(password);
             accountMapper.updateAccount(id, password, username, phonenumber);
         } catch (Exception e) {
             System.out.println(e.getMessage());

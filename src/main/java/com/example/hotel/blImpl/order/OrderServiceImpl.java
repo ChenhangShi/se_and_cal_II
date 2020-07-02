@@ -7,6 +7,7 @@ import com.example.hotel.bl.user.RecordService;
 import com.example.hotel.data.order.OrderMapper;
 import com.example.hotel.po.Order;
 import com.example.hotel.po.User;
+import com.example.hotel.util.Methods;
 import com.example.hotel.util.ServiceException;
 import com.example.hotel.vo.OrderVO;
 import com.example.hotel.vo.ResponseVO;
@@ -106,7 +107,7 @@ public class OrderServiceImpl implements OrderService {
             checkAnnualTooLate(order);
             restoreRoom(order);
             orderMapper.annulOrder(orderid);
-            setAnnualDate(orderid,OrderService.getTodayStr());
+            setAnnualDate(orderid, Methods.getTodayStr());
         }catch (Exception e){
             System.out.println(e.getMessage());
             return ResponseVO.buildFailure(ANNUAL_ERROR);
@@ -214,7 +215,7 @@ public class OrderServiceImpl implements OrderService {
             double change=order.getPrice();
             accountService.updateUserCredit(order.getUserId(),change);
             orderMapper.executeOrder(orderid);
-            updateCheckInDate(orderid,OrderService.getTodayStr());
+            updateCheckInDate(orderid,Methods.getTodayStr());
             recordService.addCreditRecord(order.getUserId(),orderid,change,"订单执行");
         }catch (Exception e){
             System.out.println(e.getMessage());
@@ -229,7 +230,7 @@ public class OrderServiceImpl implements OrderService {
             Order order=orderMapper.getOrderById(orderid);
             restoreRoom(order);
             orderMapper.finishOrder(orderid);
-            updateCheckOutDate(orderid,OrderService.getTodayStr());
+            updateCheckOutDate(orderid,Methods.getTodayStr());
         }catch (Exception e){
             System.out.println(e.getMessage());
             return ResponseVO.buildFailure(FINISH_ERROR);
@@ -266,7 +267,7 @@ public class OrderServiceImpl implements OrderService {
             Order order=orderMapper.getOrderById(orderid);
             restoreRoom(order);
             orderMapper.annulOrder(orderid);
-            setAnnualDate(orderid,OrderService.getTodayStr());
+            setAnnualDate(orderid,Methods.getTodayStr());
 
             double change=0;
             if(restoreMethod.equals("full"))

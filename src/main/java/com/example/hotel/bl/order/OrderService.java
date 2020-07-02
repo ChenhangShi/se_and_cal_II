@@ -66,18 +66,6 @@ public interface OrderService {
 
     ResponseVO finishOrder(int orderid);
 
-    static String getTodayStr(){
-        LocalDate today=LocalDate.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        return formatter.format(today);
-    }
-
-    static String getNowStr(){
-        LocalDateTime now=LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        return formatter.format(now);
-    }
-
     void updateCheckOutDate(int orderid, String leaveDate) throws Exception;
 
     void updateCheckInDate(int orderid, String checkInDate) throws Exception;

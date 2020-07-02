@@ -1,6 +1,7 @@
 package com.example.hotel.controller.user;
 
 import com.example.hotel.bl.user.AccountService;
+import com.example.hotel.bl.user.RecordService;
 import com.example.hotel.po.User;
 import com.example.hotel.vo.UserForm;
 import com.example.hotel.vo.ResponseVO;
@@ -17,6 +18,8 @@ public class AccountController {
     private final static String ACCOUNT_INFO_ERROR = "用户名或密码错误";
     @Autowired
     private AccountService accountService;
+    @Autowired
+    private RecordService recordService;
 
     @PostMapping("/login")
     public ResponseVO login(@RequestBody UserForm userForm) {
@@ -46,7 +49,20 @@ public class AccountController {
     @PostMapping("/{id}/userInfo/update")
     public ResponseVO updateInfo(@RequestBody UserInfoVO userInfoVO,@PathVariable int id){
         return accountService.updateUserInfo(id,userInfoVO.getPassword(),userInfoVO.getUserName(),userInfoVO.getPhoneNumber());
-
     }
 
+    @GetMapping("getAllUsers")
+    public ResponseVO getAllUsers(){
+        return ResponseVO.buildSuccess(accountService.getAllUsers());
+    }
+
+    @PostMapping("/{userId}/addCredit")
+    public ResponseVO addCredit(@PathVariable int userId, @RequestParam double amount){
+        return accountService.addCredit(userId,amount);
+    }
+
+    @GetMapping("/{userId}/getUserCreditRecords")
+    public ResponseVO getUserCreditRecords(@PathVariable int userId){
+        return ResponseVO.buildSuccess(accountService.getUserCreditRecords(userId));
+    }
 }
