@@ -12,7 +12,18 @@
                 <a-input
                         v-decorator="[
                         'email',
-                        { rules: [{required: true, message: '请输入用户邮箱', }] }
+                        { rules: [{required: true, message: '请输入用户邮箱', },
+                        {validator: (_, value, callback) => { //验证邮箱格式
+                            if(value.length == 0){
+                                return callback()
+                            }
+                            let patt = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/
+                            if(!patt.test(value)){
+                                return callback('邮箱格式错误');
+                            }
+                            return callback()
+                        }}
+                        ] }
                     ]"
                 />
             </a-form-item>

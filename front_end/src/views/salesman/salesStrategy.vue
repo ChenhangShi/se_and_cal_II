@@ -74,7 +74,7 @@
         <AddCoupon></AddCoupon>
         <SelectRestoreMethodModal></SelectRestoreMethodModal>
         <AddCreditModal :curUserId="curUserId"></AddCreditModal>
-        <ChangeLevelRulesModal :levelRecord="curLevelRecord"></ChangeLevelRulesModal>
+        <ChangeLevelRulesModal :levelRecord="curLevelRecord" :memberLevelInfo="memberLevelInfo"></ChangeLevelRulesModal>
     </div>
 </template>
 
@@ -161,10 +161,13 @@
             title: '用户名',
             dataIndex: 'userName',
         },
+        /*
         {
             title: '用户密码',
             dataIndex: 'password',
         },
+
+         */
         {
             title: '用户手机号',
             dataIndex: 'phoneNumber',

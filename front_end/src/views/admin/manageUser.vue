@@ -395,10 +395,12 @@
                 }
             },
         },
+        /* 加密之后显示密码无意义
         {
             title: '用户密码',
             dataIndex: 'password',
         },
+         */
         {
             title: '用户手机号',
             dataIndex: 'phoneNumber',

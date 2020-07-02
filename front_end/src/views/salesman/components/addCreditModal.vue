@@ -17,7 +17,18 @@
                 <a-form-item label="充值额度" v-bind="formItemLayout">
                     <a-input
                             placeholder="到账信用值=充值额度*100"
-                            v-decorator="['amount', { rules: [{ required: true, message: '请填写充值额度' }] }]"
+                            v-decorator="['amount', { rules: [{ required: true, message: '请填写充值额度' },
+                             {validator: (_, value, callback) => { //检验输入，输入为正整数和小数
+                            if(value.length == 0){
+                                return callback()
+                            }
+                            let reg =  /^[0-9]+([.]{1}[0-9]+){0,1}$/
+                            if(!reg.test(value)){
+                                return callback('非法输入！');
+                            }
+                            return callback()
+                            }}
+                            ] }]"
                     />
                 </a-form-item>
             </a-form>
@@ -46,7 +57,7 @@
                 memberType: Number
             }
         },
-        props: ['curUserId'],
+        props: ['curUserId', 'memberLevelInfo'],
         computed: {
             ...mapGetters([
                 'addCreditModalVisible',

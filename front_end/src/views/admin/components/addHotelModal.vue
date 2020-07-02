@@ -47,7 +47,18 @@
             <a-form-item label="手机号" v-bind="formItemLayout">
                 <a-input
                         placeholder="请填写手机号"
-                        v-decorator="['phoneNumber', { rules: [{ required: true, message: '请输入手机号' }] }]"
+                        v-decorator="['phoneNumber', { rules: [{ required: true, message: '请输入手机号' },
+                        {validator: (_, value, callback) => { //验证手机号格式
+                        if(value.length == 0){
+                                return callback()
+                            }
+                            let patt = /^[0-9]*$/
+                            if(value.length!=11 || !patt.test(value)){
+                                return callback('手机号格式错误');
+                            }
+                            return callback()
+                        }}
+                        ] }]"
                 />
             </a-form-item>
             <a-form-item label="酒店简介" v-bind="formItemLayout">
@@ -63,6 +74,7 @@
 </template>
 <script>
     import {mapGetters, mapMutations, mapActions} from 'vuex'
+    import {message} from 'ant-design-vue'
 
     export default {
         name: 'addHotelModal',
@@ -109,6 +121,8 @@
             changeStar(v) {
 
             },
+
+
             handleSubmit(e) {
                 e.preventDefault();
                 this.form.validateFieldsAndScroll((err, values) => {
@@ -122,6 +136,15 @@
                             hotelStar: this.form.getFieldValue('hotelStar'),
                             // managerId: Number(this.userId)
                         }
+                        /*
+                        let patt = /^[0-9]*$/
+
+                        if(data.phoneNum.length != 11 || !patt.test(data.phoneNum)){
+                            message.error('手机号格式错误')
+                            return
+                        }
+
+                         */
                         this.set_addHotelParams(data)
                         this.addHotel()
                     }

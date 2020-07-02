@@ -23,7 +23,13 @@
                             {
                                 initialValue: levelRecord.credit
                             },
-                            { rules: [{ required: true, message: '请输入折扣数' }]
+                            { rules: [{ required: true, message: '请输入折扣数' },
+                            {validator: (_, value, callback) => {//检验信用值的合理性，即信用值按照等级从小到大排列
+                                let pos = this.levelRecord.level - 1
+                                //改到这里了
+                            }
+                            }
+                             ]
                             },
                             ]"
                     >
@@ -36,11 +42,19 @@
                             v-decorator="[
                             'discount',
                             {
-                                initialValue: levelRecord.discount
-                            },
-                            { rules: [{ required: true, message: '请输入折扣数' }]
-                            },
-                            ]"
+                            initialValue: levelRecord.discount,
+                            rules: [{ required: true, message: '请输入折扣数' },
+                            {validator: (_, value, callback) => { //检验输入，输入为小数
+                                if(value.length == 0){
+                                    return callback()
+                                }
+                                let reg =  /^[0-9]+([.]{1}[0-9]+){0,1}$/
+                                if(!reg.test(value) || Number(value)>1){
+                                    return callback('非法输入！');
+                                }
+                                return callback()
+                            }}
+                            ]}]"
                     >
 
                     </a-input>
@@ -74,6 +88,7 @@
         },
         props: {
             levelRecord: {},
+            memberLevelInfo: {},
         },
         computed: {
             ...mapGetters([
@@ -98,7 +113,7 @@
             handleSubmit(e) {
                 e.preventDefault();
                 this.form.validateFieldsAndScroll((err, values) => {
-                    if(!err){
+                    if (!err) {
                         let data = {
                             level: Number(this.levelRecord.level),
                             credit: Number(this.form.getFieldValue('credit')),
