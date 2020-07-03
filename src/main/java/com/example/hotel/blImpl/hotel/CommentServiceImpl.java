@@ -31,7 +31,7 @@ public class CommentServiceImpl implements CommentService {
             Comment comment=new Comment();
             BeanUtils.copyProperties(commentVO,comment);
             commentMapper.postComment(comment);
-
+            // 添加优惠后要更新酒店评分
             hotelService.updateHotelRate(commentVO.getHotelId(),commentVO.getRate());
 
         }catch (Exception e){

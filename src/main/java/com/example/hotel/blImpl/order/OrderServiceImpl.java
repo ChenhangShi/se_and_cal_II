@@ -58,10 +58,12 @@ public class OrderServiceImpl implements OrderService {
             return ResponseVO.buildFailure(ROOM_NUM_LACK);
         }
         try {
+            //设置创建日期
             SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
             Date date = new Date(System.currentTimeMillis());
             String curdate = sf.format(date);
             orderVO.setCreateDate(curdate);
+
             orderVO.setOrderState("已预订");
             User user = accountService.getUserInfo(orderVO.getUserId());
             orderVO.setClientName(user.getUserName());
@@ -104,6 +106,7 @@ public class OrderServiceImpl implements OrderService {
         //取消订单逻辑的具体实现（注意可能有和别的业务类之间的交互）
         try{
             Order order=orderMapper.getOrderById(orderid);
+            // 检查是否撤销太晚
             checkAnnualTooLate(order);
             restoreRoom(order);
             orderMapper.annulOrder(orderid);
@@ -136,6 +139,7 @@ public class OrderServiceImpl implements OrderService {
     public ResponseVO deleteOrder(Integer orderid){
         try{
             Order order=orderMapper.getOrderById(orderid);
+            // 如果房间未归还 归还房间
             if(order.getOrderState().equals("已预订") || order.getOrderState().equals("异常")){
                 restoreRoom(order);
             }
@@ -155,9 +159,12 @@ public class OrderServiceImpl implements OrderService {
         LocalDate d=LocalDate.parse(checkInDate);
         LocalTime t=LocalTime.of(23,59,59);
         LocalDateTime latestCheckInTime=LocalDateTime.of(d,t);
+        // 如果撤销时间距离最晚入住时间不满6小时
         if(annualTime.plusHours(6).isAfter(latestCheckInTime)){
+            // 扣除此订单一半价格的信用
             double change=-Math.abs(order.getPrice())/2;
             accountService.updateUserCredit(order.getUserId(),change);
+
             recordService.addCreditRecord(order.getUserId(), order.getId(),change,"订单撤销");
         }
     }
@@ -173,6 +180,7 @@ public class OrderServiceImpl implements OrderService {
         for(Order order:orderList){
             try{
                 LocalDate checkInDate=LocalDate.parse(order.getCheckInDate());
+                // 订单在最晚入住时间后仍然未执行
                 if(order.getOrderState().equals("已预订") && checkInDate.isBefore(localDate)){
                     setOrderUnusual(order);
                 }
@@ -187,6 +195,7 @@ public class OrderServiceImpl implements OrderService {
         order.setOrderState("异常");
         int orderid=order.getId();
         int userId=order.getUserId();
+        // 扣除此订单价格的信用
         double change=-order.getPrice();
         accountService.updateUserCredit(userId,change);
         orderMapper.setOrderUnusual(orderid);
@@ -212,8 +221,10 @@ public class OrderServiceImpl implements OrderService {
     public ResponseVO executeOrder(int orderid){
         try{
             Order order=orderMapper.getOrderById(orderid);
+            // 增加此订单价格的信用
             double change=order.getPrice();
             accountService.updateUserCredit(order.getUserId(),change);
+
             orderMapper.executeOrder(orderid);
             updateCheckInDate(orderid,Methods.getTodayStr());
             recordService.addCreditRecord(order.getUserId(),orderid,change,"订单执行");
@@ -228,7 +239,9 @@ public class OrderServiceImpl implements OrderService {
     public ResponseVO finishOrder(int orderid){
         try{
             Order order=orderMapper.getOrderById(orderid);
+            // 归还房间
             restoreRoom(order);
+
             orderMapper.finishOrder(orderid);
             updateCheckOutDate(orderid,Methods.getTodayStr());
         }catch (Exception e){

@@ -56,7 +56,6 @@ public class HotelServiceImpl implements HotelService {
         hotel.setAddress(hotelVO.getAddress());
         hotel.setHotelName(hotelVO.getName());
         hotel.setPhoneNum(hotelVO.getPhoneNum());
-//        hotel.setManagerId(hotelVO.getManagerId());
         hotel.setRate(0.0);
         hotel.setCommentNum(0);
         hotel.setBizRegion(BizRegion.valueOf(hotelVO.getBizRegion()));
@@ -84,7 +83,6 @@ public class HotelServiceImpl implements HotelService {
     public HotelVO retrieveHotelDetails(Integer hotelId) {
         HotelVO hotelVO = hotelMapper.selectById(hotelId);
         setHotelRooms(hotelId,hotelVO);
-//        hotelVO.setCooperativeCompanies(getCooperativeCompanies(hotelId));
         hotelVO.setServices(getHotelServices(hotelId));
         return hotelVO;
     }
@@ -110,6 +108,7 @@ public class HotelServiceImpl implements HotelService {
         HotelVO hotelVO = hotelMapper.retrieveHotelByManager(managerId);
         if(hotelVO!=null){
             setHotelRooms(hotelVO.getId(),hotelVO);
+            // 酒店管理人员知道酒店的合作企业
             hotelVO.setCooperativeCompanies(getCooperativeCompanies(hotelVO.getId()));
             hotelVO.setServices(getHotelServices(hotelVO.getId()));
         }
@@ -194,6 +193,7 @@ public class HotelServiceImpl implements HotelService {
     @Override
     public List<ServiceVO> getHotelServices(int hotelId){
         List<com.example.hotel.po.Service> services = hotelMapper.getHotelServices(hotelId);
+        // VO里需要把enum类型转为String类型
         List<ServiceVO> serviceVOS = services.stream().map(s -> {
             ServiceVO serviceVO = new ServiceVO();
             serviceVO.setHotelId(s.getHotelId());
@@ -208,6 +208,7 @@ public class HotelServiceImpl implements HotelService {
         com.example.hotel.po.Service service=new com.example.hotel.po.Service();
         service.setHotelId(hotelId);
         com.example.hotel.enums.HotelService serviceToSet=null;
+        // 前端只知道toString后的，所以要一一比对
         for(com.example.hotel.enums.HotelService hotelService: com.example.hotel.enums.HotelService.values()){
             if(hotelService.toString().equals(type)){
                 serviceToSet=hotelService;

@@ -88,6 +88,7 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public ResponseVO deleteManager(Integer managerId){
         HotelVO hotelVO=hotelService.retrieveHotelByManager(managerId);
+        //把酒店的管理人员id置为null
         if(hotelVO!=null)
             hotelService.setHotelManager(hotelVO.getId(),null);
         return deleteUser(managerId);
@@ -101,10 +102,13 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public ResponseVO deleteUser(Integer userId){
         try{
+            //删除用户的订单
             List<Order> orders=orderService.getUserOrders(userId);
             for(Order order:orders)
                 orderService.deleteOrder(order.getId());
+            //删除用户的会员信息
             memberService.deleteMemberByUser(userId);
+            //删除用户
             adminMapper.deleteUser(userId);
         }catch (Exception e){
             System.out.println(e.getMessage());

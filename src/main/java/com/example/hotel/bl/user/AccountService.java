@@ -45,11 +45,27 @@ public interface AccountService {
 
     void updateUserCredit(int id,double credit);
 
+    /**
+     * 根据email取用户信息
+     * @param email
+     * @return
+     */
     User getAccountByName(String email);
 
     List<User> getAllUsers();
 
+    /**
+     * 为用户充值信用，100*amount
+     * @param userId
+     * @param amount
+     * @return
+     */
     ResponseVO addCredit(int userId, double amount);
 
+    /**
+     * 获取用户信用变更记录
+     * @param userId
+     * @return
+     */
     List<CreditRecord> getUserCreditRecords(int userId);
 }

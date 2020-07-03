@@ -17,7 +17,7 @@
     </select>
 
     <update id="updateRoomInfo">
-        update Room set curNum=curNum-#{curNum} where hotel_id=#{hotelId} and roomType=#{roomType}
+        update Room set curNum=curNum-#{num} where hotel_id=#{hotelId} and roomType=#{roomType}
     </update>
     <update id="updateRoomPrice">
         update Room set price=#{price} where hotel_id=#{hotelId} and roomType=#{roomType}

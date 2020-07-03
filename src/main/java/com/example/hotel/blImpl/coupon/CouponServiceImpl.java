@@ -36,6 +36,7 @@ public class CouponServiceImpl implements CouponService {
                              BirthdayCouponStrategyImpl birthdayCouponStrategy,
                              CompanyCouponStrategyImpl companyCouponStrategy,
                              CouponMapper couponMapper) {
+        //持有各种优惠策略
         this.couponMapper = couponMapper;
         this.targetMoneyCouponStrategy = targetMoneyCouponStrategy;
         this.targetRoomCouponStrategy = targetRoomCouponStrategy;
@@ -53,11 +54,12 @@ public class CouponServiceImpl implements CouponService {
 
     @Override
     public List<Coupon> getMatchOrderCoupon(OrderVO orderVO) {
-
+        //获取本酒店的优惠和全局优惠
         List<Coupon> hotelCoupons = getHotelAllCoupon(orderVO.getHotelId());
 
         List<Coupon> availAbleCoupons = new ArrayList<>();
 
+        //对于本酒店的优惠和全局优惠，检查本订单是不是符合优惠
         for (int i = 0; i < hotelCoupons.size(); i++) {
             for (CouponMatchStrategy strategy : strategyList) {
                 if (strategy.isMatch(orderVO, hotelCoupons.get(i))) {
@@ -74,6 +76,14 @@ public class CouponServiceImpl implements CouponService {
         List<Coupon> hotelCoupons = couponMapper.selectByHotelId(hotelId);
         return hotelCoupons;
     }
+
+
+
+
+
+    /**
+     * 金额优惠的discount为-1，折扣优惠的discountMoney为-1
+     */
 
     @Override
     public CouponVO addHotelTargetMoneyCoupon(HotelTargetMoneyCouponVO couponVO) {
@@ -102,6 +112,7 @@ public class CouponServiceImpl implements CouponService {
             coupon.setDiscount(couponVO.getDiscount());
             coupon.setDiscountMoney(-1);
 
+            //开始时间为00:00:00，结束时间为23:59:59
             String start=couponVO.getStartTime();
             String end=couponVO.getEndTime();
             LocalDate startDate=LocalDate.parse(start);

@@ -53,14 +53,40 @@ public interface HotelService {
 
     ResponseVO deleteHotel(Integer hotelId);
 
+    /**
+     * 酒店管理人员取他所管理的酒店
+     * @param managerId
+     * @return
+     */
     HotelVO retrieveHotelByManager(Integer managerId);
 
+    /**
+     * 前端获取酒店信息时，携带酒店的房间
+     * @param hotelId
+     * @param hotelVO
+     */
     void setHotelRooms(int hotelId, HotelVO hotelVO);
 
+    /**
+     * 设置酒店的工作人员
+     * @param hotelId
+     * @param managerId
+     * @return
+     */
     ResponseVO setHotelManager(Integer hotelId,Integer managerId);
 
+    /**
+     * rate是新评论的评分，而不是计算好的评分
+     * @param hotelId
+     * @param rate
+     * @throws Exception
+     */
     void updateHotelRate(int hotelId, double rate) throws Exception;
 
+    /**
+     * 获取所有的枚举商圈
+     * @return
+     */
     List<String> getAllBizRegions();
 
     ResponseVO updateHotelInfo(HotelVO hotelVO);
@@ -71,10 +97,22 @@ public interface HotelService {
 
     List<HotelCooperativeCompany> getCooperativeCompanies(int hotelId);
 
+    /**
+     * 单独返回所有的房间
+     * @return
+     */
     List<RoomVO> getAllRooms();
 
+    /**
+     * 删除酒店时调用
+     * @param hotelId
+     */
     void deleteCooperativeCompanyByHotel(int hotelId);
 
+    /**
+     * 获取所有的枚举服务
+     * @return
+     */
     List<String> getAllServices();
 
     List<ServiceVO> getHotelServices(int hotelId);
@@ -83,5 +121,9 @@ public interface HotelService {
 
     ResponseVO deleteService(int hotelId, String type);
 
+    /**
+     * 删除酒店时调用
+     * @param hotelId
+     */
     void deleteServiceByHotel(int hotelId);
 }

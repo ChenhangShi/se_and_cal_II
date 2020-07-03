@@ -44,8 +44,11 @@ public class RoomServiceImpl implements RoomService {
         if(!alreadyExists)
             roomMapper.insertRoom(hotelRoom);
         else {
+            //设置价格
             updateRoomPrice(hotelId,roomType,price);
+            //增加总数
             updateRoomTotal(hotelId,roomType,-roomNum);
+            //增加可用数量
             updateRoomInfo(hotelId,roomType,-roomNum);
         }
     }

@@ -38,6 +38,13 @@ public interface OrderMapper {
 
     int updateCheckOutDate(@Param("orderid") int orderid, @Param("checkOutDate") String checkOutDate);
     int updateCheckInDate(@Param("orderid") int orderid, @Param("checkInDate") String checkInDate);
+
+    /**
+     * 把订单createDate置为撤销日期
+     * @param orderid
+     * @param annualDate
+     * @return
+     */
     int setAnnualDate(@Param("orderid") int orderid, @Param("annualDate") String annualDate);
 
     List<Order> getUnusualOrders();

@@ -18,7 +18,11 @@ public interface AdminService {
      * @return
      */
     ResponseVO addManager(UserForm userForm);
-
+    /**
+     * 添加网站营销人员账号
+     * @param userForm
+     * @return
+     */
     ResponseVO addSalesman(UserForm userForm);
 
     /**
@@ -26,7 +30,10 @@ public interface AdminService {
      * @return
      */
     List<User> getAllManagers();
-
+    /**
+     * 获得所有网站营销人员信息
+     * @return
+     */
     List<User> getAllSalesmen();
 
     ResponseVO deleteManager(Integer managerId);

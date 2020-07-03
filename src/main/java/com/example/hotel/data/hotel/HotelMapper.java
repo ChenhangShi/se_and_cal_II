@@ -29,6 +29,12 @@ public interface HotelMapper {
 
     int setHotelManager(@Param("hotelId") Integer hotelId, @Param("managerId") Integer managerId);
 
+    /**
+     * {rate}是新评论的评分
+     * @param hotelId
+     * @param rate
+     * @return
+     */
     int updateHotelRate(int hotelId, double rate);
 
     int updateHotelInfo(int id, String address, BizRegion bizRegion, String description, HotelStar hotelStar);

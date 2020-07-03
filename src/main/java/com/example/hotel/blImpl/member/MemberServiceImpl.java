@@ -63,6 +63,7 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public ResponseVO changeLevelInfo(MemberLevelVO level){
+        // 1级需要的信用强制为0
         if(level.getLevel()==1)
             level.setCredit(0);
         MemberLevel memberLevel=new MemberLevel();
@@ -74,13 +75,10 @@ public class MemberServiceImpl implements MemberService {
             return ResponseVO.buildFailure(CHANGE_ERROR);
         }
 
-        /*
         // 每次修改等级条件 更新会员等级
-        // 为提升性能 可以不要
         List<User> users=accountService.getAllUsers();
         for(User user:users)
             updateUserLevel(user);
-         */
 
         return ResponseVO.buildSuccess(true);
     }
@@ -108,6 +106,7 @@ public class MemberServiceImpl implements MemberService {
     public int calUserLevel(double userCredit){
         List<MemberLevel> levels=getLevelInfo();
         int userLevel=1;
+        // 逐级查看，直到信用不足
         for(MemberLevel level:levels){
             double requiredCredit=level.getCredit();
             if(userCredit<requiredCredit)
