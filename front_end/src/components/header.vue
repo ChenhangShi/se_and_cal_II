@@ -78,6 +78,9 @@
                 'userInfo',
             ])
         },
+        /**
+         * 说明： 在header创建的时候把当前用户的信息写入缓存，这样页面刷新的时候header第二栏（个人中心，酒店管理，网站营销，用户管理）就不会丢失
+         * */
         created() {
             if (this.userInfo.userId == null) {
                 //console.log('之前：')
@@ -120,7 +123,7 @@
                 await this.$store.dispatch('logout')
                 this.$router.push(`/login?redirect=${this.$route.fullPath}`)
             },
-            jumpToUserInfo() { //仿照这个方法，可以把不同酒店的hotelManager区别开
+            jumpToUserInfo() {
                 this.$router.push({name: 'userInfo', params: {userId: this.userId}})
             },
             jumpToHome() {

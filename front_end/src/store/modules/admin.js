@@ -34,7 +34,7 @@ const admin = {
             address: '',
             bizRegion: '',
             hotelStar: '',
-//            rate: 0,
+//            rate: 0,  评分和评论由后台逻辑计算
 //            commentNum: 0,
             description: '',
             phoneNum: '',
@@ -56,7 +56,7 @@ const admin = {
                 ...data,
             }
         },
-        //迭代3.3 移植
+        //迭代3.3 移植，添加、删除酒店功能由管理员所有
         set_addHotelModalVisible: function (state, data) {
             state.addHotelModalVisible = data
         },
@@ -181,7 +181,7 @@ const admin = {
                 commit('set_salesmanList', res)
             }
         },
-        //3.7
+        //3.7 删除普通用户
         deleteNormalUser: async ({commit, dispatch}, userId) => {
             const res = await deleteUserAPI(userId)
             if(res){
@@ -192,6 +192,7 @@ const admin = {
                 message.error("删除失败")
             }
         },
+        // 获取普通用户列表，作用机理是从所有用户中过滤
         getNormalUserList: async ({commit, dispatch, rootGetters}) => {//这个方法没有直接调用API
             await dispatch('getUserList')  //加了await用户名单就正常了……
             let userList = rootGetters.userList

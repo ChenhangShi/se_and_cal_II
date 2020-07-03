@@ -4,14 +4,14 @@ const api = {
     adminPre: '/api/admin',
     hotelPre: '/api/hotel',
 }
-
+// 返回所有酒店工作人员
 export function getManagerListAPI() {
     return axios({
         url: `${api.adminPre}/getAllManagers`,
         method: 'GET'
     })
 }
-
+// 添加酒店工作人员
 export function addManagerAPI(data) {
     return axios({
         url: `${api.adminPre}/addManager`,
@@ -19,7 +19,7 @@ export function addManagerAPI(data) {
         data
     })
 }
-
+// 删除酒店工作人员
 export function deleteHotelManagerAPI(managerId) {
     return axios({
         url: `${api.adminPre}/${managerId}/deleteManager`,
@@ -27,7 +27,7 @@ export function deleteHotelManagerAPI(managerId) {
     })
 
 }
-
+// 删除网站营销人员
 export function deleteSalesmanAPI(salesmanId) {
     return axios({
         url: `${api.adminPre}/${salesmanId}/deleteSalesman`,
@@ -36,7 +36,7 @@ export function deleteSalesmanAPI(salesmanId) {
 
 }
 
-//迭代3.3移植自hotelManager
+//迭代3.3移植自hotelManager，添加酒店
 export function addHotelAPI(data) {
     return axios({
         url: `${api.hotelPre}/addHotel`,
@@ -44,7 +44,7 @@ export function addHotelAPI(data) {
         data,
     })
 }
-
+//删除酒店
 export function deleteHotelAPI(hotelId) {
     return axios({
         url: `${api.hotelPre}/${hotelId}/deleteHotel`,
@@ -52,7 +52,7 @@ export function deleteHotelAPI(hotelId) {
     })
 }
 
-//迭代3.3新增
+//迭代3.3新增 为酒店绑定工作人员
 export function setHotelManagerAPI(hotelId, managerId) {
     return axios({
         url: `${api.hotelPre}/${hotelId}/setHotelManager`,
@@ -60,7 +60,7 @@ export function setHotelManagerAPI(hotelId, managerId) {
         params:{hotelId,managerId}
     })
 }
-
+// 添加网站营销人员
 export function addSalesmanAPI(data) {
     return axios({
         url: `${api.adminPre}/addSalesman`,
@@ -68,7 +68,7 @@ export function addSalesmanAPI(data) {
         data,
     })
 }
-
+// 获取所有网站营销人员
 export function getAllSalesmenAPI() {
     return axios({
         url: `${api.adminPre}/getAllSalesmen`,
@@ -76,7 +76,7 @@ export function getAllSalesmenAPI() {
     })
 }
 
-//3.7
+//3.7 删除普通用户
 export function deleteUserAPI(userId) {
     return axios({
         url: `${api.adminPre}/${userId}/deleteUser`,

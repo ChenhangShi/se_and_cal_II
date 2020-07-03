@@ -28,7 +28,7 @@ export function orderMatchCouponsAPI(params) {
     })
 }
 
-//迭代3.3新增
+//迭代3.3新增 添加限时特惠
 export function timeCouponAPI(data) {
     return axios({
         url: `${api.couponPre}/timeCoupon`,
@@ -36,7 +36,7 @@ export function timeCouponAPI(data) {
         data,
     })
 }
-
+// 添加多间特惠
 export function targetRoomCouponAPI(data) {
     return axios({
         url: `${api.couponPre}/targetRoomCoupon`,
@@ -45,7 +45,7 @@ export function targetRoomCouponAPI(data) {
     })
 }
 
-//3.4.5
+//3.4.5 添加生日特惠
 export function birthdayCouponAPI(data) {
     return axios({
         url: `${api.couponPre}/birthdayCoupon`,
@@ -53,7 +53,7 @@ export function birthdayCouponAPI(data) {
         data,
     })
 }
-
+// 添加企业优惠
 export function companyCouponAPI(data) {
     return axios({
         url: `${api.couponPre}/companyCoupon`,

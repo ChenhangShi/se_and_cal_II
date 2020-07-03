@@ -37,7 +37,7 @@ export function updateUserInfoAPI(data) {
     })
 }
 
-//3.4
+//3.4 发表评论
 export function postCommentAPI(data) {
     return axios({
         url: `${api.commentPre}/postComment`,
@@ -46,14 +46,14 @@ export function postCommentAPI(data) {
     })
 }
 
-//3.4.5
+//3.4.5 获取会员信息，在用户登录的时候
 export function getMemberInfoAPI(userId) {
     return axios({
         url: `${api.memberPre}/${userId}/getMemberInfo`,
         method: 'GET',
     })
 }
-
+// 注册会员
 export function registerMemberAPI(data) {
     return axios({
         url: `${api.memberPre}/registerMember`,
@@ -62,7 +62,7 @@ export function registerMemberAPI(data) {
     })
 }
 
-//3.6.1
+//3.6.1 获取当前用户的信用记录
 export function getUserCreditRecordsAPI(userId) {
     return axios({
         url: `${api.userPre}/${userId}/getUserCreditRecords`,
