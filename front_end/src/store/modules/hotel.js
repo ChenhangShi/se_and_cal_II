@@ -28,8 +28,8 @@ const hotel = {
         currentOrderRoom: {},
         orderMatchCouponList: [],
         //3.4添加所有商圈的属性是因为要在hotelList页面按照商圈筛选酒店
-        hotelComments: [],
-        bizRegionList: [],
+        hotelComments: [],//当前酒店评论
+        bizRegionList: [],//所有商圈信息，用于新建酒店时的下拉框
         roomListModalVisible: false, //迭代3.6增，在主界面预订酒店展示该酒店的roomList
         roomList: [] //迭代3.6增，为了根据房间信息检索酒店
     },

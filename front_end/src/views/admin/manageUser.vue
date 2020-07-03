@@ -323,6 +323,9 @@
     </div>
 </template>
 <script>
+    /**
+     * 管理员的"用户管理"界面
+     * */
     import {mapGetters, mapMutations, mapActions} from 'vuex'
     import AddManagerModal from './components/addManagerModal'
     import AddHotelModal from './components/addHotelModal'
@@ -333,6 +336,7 @@
             title: '用户ID',
             dataIndex: 'id',
             key: 'id',
+            // 以下是在table中搜索相关的部分
             scopedSlots: {
                 filterDropdown: 'filterDropdown',
                 filterIcon: 'filterIcon',
@@ -555,7 +559,7 @@
                 'normalUserList',
             ])
         },
-        async mounted() {
+        async mounted() { // 取得酒店、普通用户、酒店工作人员、网站营销人员的列表
             await this.getManagerList()
             await this.getHotelList()
             await this.getSalesmanList()
@@ -597,11 +601,13 @@
                 this.deleteHotelA(record.id)
             },
             //迭代3.3 新增
+            // 管理员在酒店记录上点击添加酒店工作人员出发，传入那条酒店记录
             addManagerOfThisHotel(record) {
                 this.set_currentHotelId(record.id)
                 this.set_addManagerType("HotelManager")
                 this.set_addManagerModalVisible(true)
             },
+            // 添加网站营销人员，和添加酒店工作人员共用一个modal
             addSalesman(record) {
                 this.set_addManagerType("Salesman")
                 this.set_addManagerModalVisible(true)
@@ -611,7 +617,7 @@
                 this.deleteNormalUser(record.id)
             },
 
-
+            // table搜索的处理函数
             handleSearch(selectedKeys, confirm, dataIndex) {
                 confirm();
                 this.searchText = selectedKeys[0];

@@ -33,11 +33,11 @@ const getDefaultState = () => {
         showOrderDetailModalVisible: false,
         //迭代3.2新增，user当前订单属性，到时候查看订单详情的时候暂时不用props传输数据 以及迭代3.5用于撤销异常订单修改信用值
         currentOrder: {},
-        //3.4
+        //3.4 用户评论对话框
         addCommentModalVisible: false,
         //3.4.5会员相关
-        memberInfo: null,
-        registerMemberModalVisible: false,
+        memberInfo: null,  //当前用户的会员信息，null表示非会员
+        registerMemberModalVisible: false, //注册会员对话框
         //3.6 信用记录
         userCreditRecord: [],
         //3.7 会员等级表
@@ -113,8 +113,8 @@ const user = {
             const res = await loginAPI(userData)
             if (res) {
                 //迭代3.3 bug fix
-                console.log("登陆信息：")
-                console.log(res)
+                // console.log("登陆信息：")
+                // console.log(res)
                 sessionStorage.setItem("userId", res.id) //在本地缓存中储存当前用户信息
                 //sessionStorage.setItem("")
 
@@ -131,7 +131,7 @@ const user = {
             }
         },
         getUserInfo({state, commit}) {
-            return new Promise((resolve, reject) => {//猜想：这个方法可能没有await
+            return new Promise((resolve, reject) => {
                 getUserInfoAPI(state.userId).then(response => {
                     const data = response
                     if (!data) {
@@ -205,7 +205,7 @@ const user = {
                 commit('set_currentOrder', res)
             }
         },
-        //3.4
+        //3.4 发表评论
         postComment: async ({commit, dispatch}, data) => {
             const res = await postCommentAPI(data)
             if (res) {
@@ -215,7 +215,7 @@ const user = {
                 message.error('评论失败')
             }
         },
-        //3.4.5
+        //3.4.5 用户登录时获取会员信息
         getMemberInfo: async ({state, commit}) => {
             const res = await getMemberInfoAPI(state.userId)
             if (res) {
@@ -241,7 +241,7 @@ const user = {
                 // console.log(state.userCreditRecord)
             }
         },
-        //3.7
+        //3.7 获取等级表
         getMemberLevelInfo: async ({state, commit}) => {
             const res = await getLevelInfoAPI()
             if(res){

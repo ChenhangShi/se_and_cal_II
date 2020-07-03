@@ -39,6 +39,9 @@
     </a-modal>
 </template>
 <script>
+    /**
+     * 添加酒店工作人员的对话框
+     * */
     import {mapGetters, mapMutations, mapActions} from 'vuex'
 
     export default {

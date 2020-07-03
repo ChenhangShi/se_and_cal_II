@@ -24,6 +24,9 @@
     </a-modal>
 </template>
 <script>
+    /**
+     * 添加酒店服务对话框
+     * */
     import {mapGetters, mapMutations, mapActions} from 'vuex'
 
     export default {
@@ -48,6 +51,9 @@
                 'allServicesList',
                 'targetHotel',
             ]),
+            /**
+             * 根据现有服务和所有服务，求出还未添加的服务，用于渲染下拉框
+             * */
             missingServices: function(){
                 let curServices=[]
                 for(let i in this.targetHotel.services){

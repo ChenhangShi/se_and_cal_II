@@ -79,6 +79,9 @@
 </template>
 
 <script>
+    /**
+     * 网站营销人员的网站营销界面
+     * */
     import {mapGetters, mapMutations, mapActions} from 'vuex'
     import AddCoupon from '../hotelManager/components/addCouponModel'
     import SelectRestoreMethodModal from "./components/selectRestoreMethodModal";

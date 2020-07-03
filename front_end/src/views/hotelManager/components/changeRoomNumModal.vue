@@ -56,6 +56,10 @@
 </template>
 
 <script>
+    /**
+     * 酒店工作人员手动更改可用房间数量
+     * 用于线下房间数量变动的情况
+     * */
     import {mapGetters, mapMutations, mapActions} from 'vuex'
     import {message} from 'ant-design-vue'
     const moment = require('moment')

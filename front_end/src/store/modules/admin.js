@@ -22,7 +22,7 @@ const admin = {
             email: '',
             password: '',
         },
-        //迭代3.3，addManager也可以添加网站营销人员，通过新增的type区别
+        //迭代3.3，addManager也可以添加网站营销人员，通过新增的type区别，两者共用一个modal
         addManagerType: '',
         salesmanList: [],
 

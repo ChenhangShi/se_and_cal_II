@@ -36,6 +36,9 @@
 </template>
 
 <script>
+    /**
+     * 选择撤销异常订单的时候恢复全部信用还是一半信用
+     * */
     import {mapGetters, mapMutations, mapActions} from 'vuex'
 
     const moment = require('moment')

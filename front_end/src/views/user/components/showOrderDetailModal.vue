@@ -55,6 +55,11 @@
 </template>
 
 <script>
+    /**
+     * 展示订单详情
+     * 该组件由客户和酒店工作人员复用
+     * 就带工作人员可以在这个对话框里更改订单状态
+     * */
     import {mapGetters, mapMutations, mapActions} from 'vuex'
 
     const moment = require('moment')

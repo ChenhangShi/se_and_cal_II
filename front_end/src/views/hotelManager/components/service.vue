@@ -34,6 +34,9 @@
     </div>
 </template>
 <script>
+    /**
+     * 酒店服务列表
+     * */
     import {mapGetters, mapMutations, mapActions} from 'vuex'
     import AddCoupon from './addCouponModel'
     import AddService from "./addService";

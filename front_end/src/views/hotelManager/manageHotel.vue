@@ -237,6 +237,10 @@
     </div>
 </template>
 <script>
+    /**
+     * 酒店工作人员管理酒店的界面
+     * */
+
     import {mapGetters, mapMutations, mapActions} from 'vuex'
     //import AddHotelModal from './components/addHotelModal'
     import AddRoomModal from './components/addRoomModal'
@@ -470,6 +474,7 @@
                 'updateHotelInfo',
                 "getRoomList",
             ]),
+            // 将酒店对象的星级转化为数字，方便rate组件渲染
             calHotelStar(hotelStar) {
                 switch (hotelStar) {
                     case "Three":

@@ -38,6 +38,9 @@
 </template>
 
 <script>
+    /**
+     * 用户评分、评论的对话框
+     * */
     import {mapGetters, mapMutations, mapActions} from 'vuex'
 
     const moment = require('moment')

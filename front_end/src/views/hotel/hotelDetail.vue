@@ -97,6 +97,10 @@
     </a-layout>
 </template>
 <script>
+    /**
+     * 酒店详情页面
+     * 分三栏：房间信息，用户评价，我的订单
+     * */
     import {mapGetters, mapActions, mapMutations} from 'vuex'
     import RoomList from './components/roomList'
 
@@ -162,13 +166,14 @@
                 'hotelComments',
                 'userOrderList',
             ]),
+            //计算当前用户在当前酒店的订单，为了渲染我的订单tab
             userOrdersOfCurrentHotel: function () {
                 let curHotelId = this.currentHotelInfo.id
                 let newList = this.userOrderList.filter(function (item) {
                     return item.hotelId == curHotelId
                 })
                 return newList
-            }, //当前用户在当前酒店的订单
+            },
         },
         async mounted() {
             this.set_currentHotelId(Number(this.$route.params.hotelId))
@@ -191,6 +196,7 @@
                 "getHotelComments",
                 "getUserOrders"
             ]),
+            // 翻译hotel对象中的星级，便于渲染rate组件
             calHotelStar(hotelStar) {
                 switch (hotelStar) {
                     case "Three":

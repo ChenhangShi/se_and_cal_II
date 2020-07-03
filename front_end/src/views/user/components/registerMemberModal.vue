@@ -58,6 +58,9 @@
 </template>
 
 <script>
+    /**
+     * 用户注册会员对话框
+     * */
     import {mapGetters, mapMutations, mapActions} from 'vuex'
 
     const moment = require('moment')
@@ -95,6 +98,9 @@
                 "getUserInfo",
                 "registerMember",
             ]),
+            /**
+             * 根据下拉框的会员类型选择，动态显示表单内容
+             * */
             changeMemberType(v) {
                 this.memberType = Number(v)
             },

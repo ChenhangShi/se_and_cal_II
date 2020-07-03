@@ -63,12 +63,12 @@ const hotelManager = {
         couponList: [],
 
         targetHotel: {}, //迭代3.3新增，想不出名字了，存储这个manager所管理的酒店
-        targetHotelOrderList: [],//迭代3.3新增
-        changeRoomNumModalVisible: false,
+        targetHotelOrderList: [],//迭代3.3新增 所管理酒店的所有订单
+        changeRoomNumModalVisible: false, //更改房间数量的对话框，用于线下预订时房间数量变更
 
-        serviceVisible: false,
-        addServiceVisible: false,
-        allServicesList:[],
+        serviceVisible: false,//酒店服务对话框
+        addServiceVisible: false,//增加酒店服务对话框
+        allServicesList:[],//所有服务列表
     },
     mutations: {
         set_orderList: function (state, data) {
@@ -195,8 +195,14 @@ const hotelManager = {
                 commit('set_couponList', res)
             }
         },
+
+        /**
+         * 添加优惠券
+         * 根据不同的优惠券种类调用不同api
+         * */
         addHotelCoupon: async ({commit, dispatch}, data) => {
             let res = null;
+
             if (data.type == 1) {
                 res = await birthdayCouponAPI(data)
             }
@@ -260,7 +266,6 @@ const hotelManager = {
                 if (res) {
                     //dispatch('getAllOrders')
                     dispatch('getTargetHotelOrderList')
-                    console.log()
                     commit('set_showOrderDetailModalVisible', false) //这个调用了store/modules/user里面的方法，把表单隐藏
                     message.success("更改为已执行")
                 } else {

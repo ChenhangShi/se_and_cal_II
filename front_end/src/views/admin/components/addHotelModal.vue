@@ -73,6 +73,9 @@
     </a-modal>
 </template>
 <script>
+    /**
+     * 添加酒店的对话框
+     * */
     import {mapGetters, mapMutations, mapActions} from 'vuex'
     import {message} from 'ant-design-vue'
 
@@ -103,7 +106,7 @@
         beforeCreate() {
             this.form = this.$form.createForm(this, {name: 'addHotelModal'});
         },
-        async mounted() {
+        async mounted() {// 创建的时候获取所有商圈信息，为了渲染选择酒店的下拉框
             await this.getAllBizRegions()
         },
         methods: {
@@ -135,16 +138,9 @@
                             phoneNum: this.form.getFieldValue('phoneNumber'),
                             hotelStar: this.form.getFieldValue('hotelStar'),
                             // managerId: Number(this.userId)
-                        }
-                        /*
-                        let patt = /^[0-9]*$/
-
-                        if(data.phoneNum.length != 11 || !patt.test(data.phoneNum)){
-                            message.error('手机号格式错误')
-                            return
+                            // 这里不再添加managerId，由系统管理员为酒店添加manager
                         }
 
-                         */
                         this.set_addHotelParams(data)
                         this.addHotel()
                     }

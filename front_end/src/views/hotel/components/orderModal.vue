@@ -133,6 +133,9 @@
     </a-modal>
 </template>
 <script>
+    /**
+     * 用户点击预订所弹出的对话框
+     * */
     import {mapGetters, mapMutations, mapActions} from 'vuex'
 
     const moment = require('moment')
@@ -299,7 +302,7 @@
                     }
                 });
             },
-            calFinalPrice(totalPrice){
+            calFinalPrice(totalPrice){ // 计算最终价格，保留两位小数
                 if(this.memberInfo == null){
                     return totalPrice
                 }

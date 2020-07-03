@@ -37,6 +37,9 @@
 </template>
 
 <script>
+    /**
+     * 信用充值对话框
+     * */
     import {mapGetters, mapMutations, mapActions} from 'vuex'
 
     const moment = require('moment')
@@ -57,7 +60,7 @@
                 memberType: Number
             }
         },
-        props: ['curUserId', 'memberLevelInfo'],
+        props: ['curUserId', 'memberLevelInfo'], // 这里接受从父组件传来的用户id
         computed: {
             ...mapGetters([
                 'addCreditModalVisible',

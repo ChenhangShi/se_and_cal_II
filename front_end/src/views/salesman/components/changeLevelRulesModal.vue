@@ -84,6 +84,9 @@
 </template>
 
 <script>
+    /**
+     * 修改等级表对话框
+     * */
     import {mapGetters, mapMutations, mapActions} from 'vuex'
 
     const moment = require('moment')
@@ -128,7 +131,8 @@
             ]),
             handelCancel() {
                 this.form.resetFields()
-                this.$emit('getFromSon', false)
+                this.$emit('getFromSon', false)  // 取消的时候，向父组件发送信息，把disabled设置为false
+                // 下次点击充值的时候再次根据level是否为1来判断是否禁用更改当前等级的信用值
                 this.set_changeLevelRulesModalVisible(false)
             },
             handleSubmit(e) {

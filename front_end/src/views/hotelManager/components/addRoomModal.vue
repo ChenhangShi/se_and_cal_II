@@ -57,6 +57,9 @@
     </a-modal>
 </template>
 <script>
+    /**
+     * 录入房间对话框
+     * */
     import {mapGetters, mapMutations, mapActions} from 'vuex'
 
     export default {

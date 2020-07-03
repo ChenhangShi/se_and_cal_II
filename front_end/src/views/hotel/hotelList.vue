@@ -138,6 +138,9 @@
     </div>
 </template>
 <script>
+    /**
+     * 酒店list，同时也是系统的主界面
+     * */
     import HotelCard from './components/hotelCard'
     import {mapActions, mapGetters, mapMutations} from 'vuex'
     import hotel from "../../store/modules/hotel";
@@ -150,7 +153,7 @@
         data() {
             return {
                 emptyBox: [{name: 'box1'}, {name: 'box2'}, {name: 'box3'}],
-                hotelListAfterSelect: [], //总的筛选结果
+                hotelListAfterSelect: [], //总的筛选结果，是下面几个结果的交集
                 hotelListAfterBizRegionSelect: [], //商圈筛选的结果
                 hotelListAfterOrderedSelect: [], //是否仅展示预定的酒店 筛选的结果
                 roomTypeSelect: [],  //房型筛选结果（不写那么长了）
@@ -171,6 +174,7 @@
             await this.getAllBizRegions()
             await this.getUserOrders()
             await this.getRoomList()
+            // 把各个筛选结果初始化为hotelList
             this.hotelListAfterSelect = this.hotelList
             this.hotelListAfterBizRegionSelect = this.hotelList
             this.hotelListAfterOrderedSelect = this.hotelList
@@ -180,9 +184,10 @@
             this.rateSelect = this.hotelList
             this.emptyRoomSelect = this.hotelList
             this.nameSearch = this.hotelList
+            // 通过hotelList和roomList，计算酒店与房间的映射关系，为了筛选有空房的酒店
             this.initRoomMap()
-            console.log("映射关系")
-            console.log(this.roomMap)
+            // console.log("映射关系")
+            // console.log(this.roomMap)
         },
         computed: {
             ...mapGetters([
@@ -217,6 +222,12 @@
             jumpToDetails(id) {
                 this.$router.push({name: 'hotelDetail', params: {hotelId: id}})
             },
+            /**
+             * 以下几个方法是当筛选条件改变的时候，先根据自己的表单内容筛选酒店，在与其余条件筛选出来的酒店列表求交集
+             *
+             * */
+
+            // 商圈下拉框改变
             bizRegionChange(keyword) {//商圈下拉框改变时执行
                 if (keyword !== '全部') {
                     let newList = this.hotelList.filter(function (item) {
@@ -226,7 +237,7 @@
                 } else this.hotelListAfterBizRegionSelect = this.hotelList
                 this.setHotelListAfterSelect()//求筛选条件的交集，作为最终结果
             },
-
+            // 订单状态下拉框改变
             orderedSelectorChange(keyword) {//同理，是否仅显示已预订下拉框改变时执行
                 if (keyword == '正常') {
                     let orderedHotelIdList = []
@@ -306,6 +317,7 @@
                 //console.log(this.afterRoomTypeSelect)
                 this.setHotelListAfterSelect()
             },
+
             //处理根据价格筛选酒店
             priceSelectorChange(k) {
                 k = k.map(function (elem) {
@@ -341,6 +353,7 @@
                 //console.log(this.priceSelect)
                 this.setHotelListAfterSelect()
             },
+
             //处理筛选有空房的酒店
             emptyRoomSelectorChange(e) {
                 if (!e.target.checked) {
@@ -360,6 +373,7 @@
                 }
                 this.setHotelListAfterSelect()
             },
+
             //按照星级筛选
             starSelectorChange(k){
                 if(k.length == 0){
@@ -372,7 +386,8 @@
                 }
                 this.setHotelListAfterSelect()
             },
-            //按照评分筛选
+
+            //按照评分区间筛选
             rateSelectorChange(k){
                 k = k.map(function (item) {
                     return Number(item)
@@ -390,7 +405,12 @@
                 }
                 this.setHotelListAfterSelect()
             },
-            //搜索框清空时调用，把搜索列表清空
+
+            /**
+             * 以下几个方法是搜索酒店功能相关
+             * */
+
+            //搜索框清空时调用，把搜索列表清空，防止搜索框清空，界面上什么也没有
             searchBoxChange(e){
                 let temp = e.target.value
                 if(temp.length == 0){
@@ -398,7 +418,8 @@
                 }
                 this.setHotelListAfterSelect()
             },
-            //根据酒店名搜索酒店，支持空格，逗号分隔
+
+            //根据酒店名搜索酒店，支持空格，逗号分隔，支持显示多个结果
             searchHotelByName(k){
                 let kList = k.split(/ |,|，/) //按照空格，逗号或者中文逗号分割
                 console.log(kList)
@@ -425,6 +446,10 @@
                 this.setHotelListAfterSelect()
             },
 
+            /**
+             * 这个方法是把筛选、搜索所得到的8个数组求交集，最终得到综合筛选结果
+             * */
+
             setHotelListAfterSelect() {
                 let ls1 = this.hotelListAfterBizRegionSelect
                 let ls2 = this.hotelListAfterOrderedSelect
@@ -439,7 +464,14 @@
                 this.hotelListAfterSelect = lists
                 this.sortCurrentList()
             },
-            //hotelCard排序相关
+
+            /**
+             * 以下三个方法是排序相关的
+             * 根据不同的checkBox，先记录按照什么排序
+             * 然后根据条件综合排序，或者按照一个条件排序，或者默认排序
+             * 默认排序即按照hotelId排序
+             * */
+
             sortByStarClicked(e) {
                 this.sortByStar = e.target.checked
                 this.sortCurrentList()
@@ -476,7 +508,11 @@
                     })
                 }
             },
-            initRoomMap() {//这个函数负责根据roomList生成酒店id和房间型号的映射关系
+            /**
+             * 这个函数负责根据roomList生成酒店id和房间型号的映射关系
+             * 为了筛选的时候筛选到有空房的酒店
+             * */
+            initRoomMap() {
                 let rl = this.roomList
                 let roomMap = [];
                 for (let i = 0; i < rl.length; i++) {
@@ -501,6 +537,10 @@
                 }
                 this.roomMap = roomMap
             },
+            /**
+             * 由setHotelListAfterSelect函数调用
+             * 求两个hotel的对象数组的交集
+             * */
             mergeTwoLists(ls1, ls2) {//用于求两个筛选条件作用下生成的两个list的交集
                 let newList = []
                 for (let i = 0; i < ls1.length; i++) {

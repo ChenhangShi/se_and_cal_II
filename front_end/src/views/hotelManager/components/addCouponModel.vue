@@ -96,6 +96,9 @@
     </a-modal>
 </template>
 <script>
+    /**
+     * 添加优惠券的对话框
+     * */
     import {mapGetters, mapMutations, mapActions} from 'vuex'
 
     export default {
@@ -159,6 +162,9 @@
             cancel() {
                 this.set_addCouponVisible(false)
             },
+            /**
+             * 这里根据所选择的优惠券类型，动态地改变表单内容
+             * */
             changeType(v) {
                 this.discountType = v
             },
@@ -178,7 +184,10 @@
 
                  */
 
-
+                /**
+                 * 提交表单
+                 * 根据优惠类型去生成不同内容的data
+                 * */
                 this.form.validateFieldsAndScroll((err, values) => {
                     if (!err) {
                         const curType = Number(this.form.getFieldValue('type'))

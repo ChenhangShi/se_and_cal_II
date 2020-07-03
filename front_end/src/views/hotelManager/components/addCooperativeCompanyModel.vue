@@ -19,6 +19,9 @@
     </a-modal>
 </template>
 <script>
+    /**
+     * 添加酒店合作企业的对话框
+     * */
     import {mapGetters, mapMutations, mapActions} from 'vuex'
 
     export default {

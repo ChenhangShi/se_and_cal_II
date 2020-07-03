@@ -146,6 +146,9 @@
     </div>
 </template>
 <script>
+    /**
+     * 用户个人信息界面
+     * */
     import {mapGetters, mapMutations, mapActions} from 'vuex'
     import ShowOrderDetailModal from "./components/showOrderDetailModal";
     import AddCommentModal from "./components/addCommentModal";
@@ -277,7 +280,7 @@
             await this.getUserOrders()
             await this.getMemberInfo()
             await this.getUserCreditRecord()
-            await this.getMemberLevelInfo()
+            await this.getMemberLevelInfo() // 要初始化用户的会员信息
         },
         methods: {
             ...mapActions([

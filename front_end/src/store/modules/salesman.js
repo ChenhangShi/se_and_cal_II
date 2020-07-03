@@ -19,13 +19,13 @@ import {message} from 'ant-design-vue'
 
 const salesman = {
     state: {
-        globalCouponList: [],
+        globalCouponList: [], //全局优惠券列表
         //couponVisible和addCouponVisible暂时借用hotelManager的
-        unusualOrderList: [],
-        userList: [],
-        selectRestoreMethodModalVisible: false,
-        addCreditModalVisible: false,
-        changeLevelRulesModalVisible: false,
+        unusualOrderList: [],//异常订单列表
+        userList: [],//所有用户列表
+        selectRestoreMethodModalVisible: false, //撤销异常订单时选择信用值恢复方式的对话框
+        addCreditModalVisible: false, //信用充值对话框
+        changeLevelRulesModalVisible: false, //更改会员等级表的对话框
     },
     mutations: {
         set_globalCouponList: function (state, data) {
@@ -57,8 +57,8 @@ const salesman = {
         //3.5
         getUnusualOrderList: async ({commit}) => {
             const res = await getUnusualOrdersAPI()
-            console.log("异常订单列表")
-            console.log(res)
+            // console.log("异常订单列表")
+            // console.log(res)
             if (res) {
                 commit('set_unusualOrderList', res)
             }

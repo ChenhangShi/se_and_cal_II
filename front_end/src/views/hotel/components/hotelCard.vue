@@ -26,7 +26,7 @@
                     </div>
                     <div></div>
                     <div>
-                        <a-button type="primary" @click.stop="showRoomListModal(hotel.id)" :style="{ marginTop: '5px' }"> <!--阻止冒泡事件哈哈哈哈哈哈-->
+                        <a-button type="primary" @click.stop="showRoomListModal(hotel.id)" :style="{ marginTop: '5px' }"> <!--阻止冒泡事件-->
                             预定
                         </a-button>
                     </div>
@@ -37,6 +37,10 @@
     </a-card>
 </template>
 <script>
+    /**
+     * 酒店卡片
+     * 显示订单状态、评分、评论、预订按钮
+     * */
     import {mapGetters, mapActions, mapMutations} from 'vuex'
     import RoomListModal from "./roomListModal";
 
@@ -58,6 +62,7 @@
         components: {
             RoomListModal,
         },
+        // 渲染卡片的时候要获取当前用户的订单，才能显示出订单情况
         async mounted() {
             await this.getUserOrders()
 
@@ -74,6 +79,10 @@
                 'userOrderList',
                 "currentHotelInfo",
             ]),
+            /**
+             * 以下三个计算属性
+             * 通过遍历当前用户的订单列表来返回是否有正常、异常、已撤销的订单
+            */
             usual: {
                 get: function () {
                     let curHotelId = this.hotel.id
@@ -135,11 +144,13 @@
                 "set_roomListModalVisible",
                 "set_currentHotelId",
             ]),
+            // 在card上点击预订，显示房间信息
             showRoomListModal(hotelId) {
                 this.set_currentHotelId(hotelId)
                 this.getHotelById()
                 this.set_roomListModalVisible(true)
             },
+            // 后端存储星级用的是单词，前端渲染评分组件需要把对应星级转化为数字
             calHotelStar(hotelStar) {
                 switch (hotelStar) {
                     case "Three":
