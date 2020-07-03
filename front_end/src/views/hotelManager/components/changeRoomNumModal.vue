@@ -34,7 +34,18 @@
                             placeholder="请输入增加/减少的房间数量"
                             v-decorator="[
                             'num',
-                            { rules: [{ required: true, message: '请输入增加/减少的房间数量' }] }]"
+                            { rules: [{ required: true, message: '请输入增加/减少的房间数量' },
+                            {validator: (_, value, callback) => { //检验输入，输入为正整数，且不以0开头
+                                if(value.length == 0){
+                                    return callback()
+                                }
+                                let reg = /^[1-9][0-9]*$/
+                                if(!reg.test(value)){
+                                    return callback('非法输入！');
+                                }
+                                return callback()
+                            }}
+                            ] }]"
                     >
 
                     </a-input>

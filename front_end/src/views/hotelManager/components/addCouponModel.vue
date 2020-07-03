@@ -46,7 +46,18 @@
             <a-form-item label="优惠金额" v-bind="formItemLayout" v-if="discountType==3 || discountType == 2">
                 <a-input
                         placeholder="请填写优惠金额"
-                        v-decorator="['discountMoney', { rules: [{ required: true, message: '请填写优惠金额' }] }]"
+                        v-decorator="['discountMoney', { rules: [{ required: true, message: '请填写优惠金额' },
+                        {validator: (_, value, callback) => { //检验输入，输入为正整数和小数
+                            if(value.length == 0){
+                                return callback()
+                            }
+                            let reg =  /^[0-9]+([.]{1}[0-9]+){0,1}$/
+                            if(!reg.test(value)){
+                                return callback('非法输入！');
+                            }
+                            return callback()
+                        }}
+                        ] }]"
                 />
             </a-form-item>
             <a-form-item v-bind="formItemLayout" label="持续时间区间" v-if="discountType == 4">
@@ -66,7 +77,18 @@
                          v-if="discountType==1 ||discountType==4 || discountType== 5" min="0" max="1">
                 <a-input
                         placeholder="请填写折扣数,例如0.88表示8.8折"
-                        v-decorator="['discount', { rules: [{ required: true, message: '请填写优惠金额' }] }]"
+                        v-decorator="['discount', { rules: [{ required: true, message: '请填写优惠金额' },
+                        {validator: (_, value, callback) => { //检验输入，输入为小于等于1的整数或小数
+                                if(value.length == 0){
+                                    return callback()
+                                }
+                                let reg =  /^[0-9]+([.]{1}[0-9]+){0,1}$/
+                                if(!reg.test(value) || Number(value)>1){
+                                    return callback('非法输入！');
+                                }
+                                return callback()
+                        }}
+                        ] }]"
                 />
             </a-form-item>
 

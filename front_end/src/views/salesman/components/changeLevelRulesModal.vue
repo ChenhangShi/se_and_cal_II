@@ -14,24 +14,41 @@
                 </a-button>
             </template>
             <a-form :form="form">
-                <a-form-item label="信用值">
+                <a-form-item label="信用值" >
                     <a-input
-
+                            :disabled="disabled"
                             placeholder="请输入达到该等级所需信用值"
                             v-decorator="[
                             'credit',
                             {
-                                initialValue: levelRecord.credit
-                            },
-                            { rules: [{ required: true, message: '请输入折扣数' },
-                            {validator: (_, value, callback) => {//检验信用值的合理性，即信用值按照等级从小到大排列
-                                let pos = this.levelRecord.level - 1
-                                //改到这里了
-                            }
-                            }
-                             ]
-                            },
-                            ]"
+                                initialValue: levelRecord.credit,
+                                rules: [{ required: true, message: '请输入信用值' },
+                            {validator: (_, value, callback) => {//检查输入是否为正整数或小数
+                                 if(value.length == 0){
+                                    return callback()
+                                }
+                                let reg =  /^[0-9]+([.]{1}[0-9]+){0,1}$/
+                                if(!reg.test(value)){
+                                    return callback('非法输入！')
+                                }
+                                /* 因素过多，暂时舍弃
+                                else{//检验信用值的合理性，即信用值按照等级从小到大排列
+                                    let pos = Number(this.levelRecord.level) - 1
+                                    if(pos == 0 && Number(value) > Number(this.memberLevelInfo[1].credit)){
+                                        return callback('修改后的信用值不合逻辑！')
+                                    }
+                                    else if(pos == 4 &&Number(value) < Number(this.memberLevelInfo[3].credit)){
+                                        return callback('修改后的信用值不合逻辑！')
+                                    }
+                                    else if(Number(value) > Number(this.memberLevelInfo[pos + 1].credit) && Number(value) < Number(this.memberLevelInfo[pos - 1].credit)){
+                                        return callback('修改后的信用值不合逻辑！')
+                                    }
+                                }
+
+                                 */
+                                return callback()
+                            }}
+                            ]}]"
                     >
                     </a-input>
                 </a-form-item>
@@ -44,7 +61,7 @@
                             {
                             initialValue: levelRecord.discount,
                             rules: [{ required: true, message: '请输入折扣数' },
-                            {validator: (_, value, callback) => { //检验输入，输入为小数
+                            {validator: (_, value, callback) => { //检验输入，输入为小于等于1的整数或小数
                                 if(value.length == 0){
                                     return callback()
                                 }
@@ -73,6 +90,7 @@
     export default {
         name: "changeLevelRulesModal",
         data() {
+
             return {
                 formItemLayout: {
                     labelCol: {
@@ -84,11 +102,13 @@
                         sm: {span: 16},
                     },
                 },
+
             }
         },
         props: {
             levelRecord: {},
             memberLevelInfo: {},
+            disabled: {}, //用于操控等级1的信用值不可更改
         },
         computed: {
             ...mapGetters([
@@ -107,7 +127,8 @@
                 "getMemberLevelInfo",
             ]),
             handelCancel() {
-                this.form.resetFields();
+                this.form.resetFields()
+                this.$emit('getFromSon', false)
                 this.set_changeLevelRulesModalVisible(false)
             },
             handleSubmit(e) {
@@ -125,7 +146,15 @@
                         this.set_changeLevelRulesModalVisible(false)
                     }
                 })
+            },
+            /*
+            isDisabled(){//如果当前是等级1的信用值，不让营销人员做修改
+                if(Number(this.levelRecord.level) == 1){
+                    this.disabled = true
+                }
             }
+
+             */
         },
     }
 </script>

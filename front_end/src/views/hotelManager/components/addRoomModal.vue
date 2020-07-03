@@ -22,13 +22,35 @@
             <a-form-item label="房间数量" v-bind="formItemLayout">
                 <a-input
                         placeholder="请填写房间数量"
-                        v-decorator="['roomNum', { rules: [{ required: true, message: '请输入房间数量' }] }]"
+                        v-decorator="['roomNum', { rules: [{ required: true, message: '请输入房间数量' },
+                         {validator: (_, value, callback) => { //检验输入，输入为正整数，且不以0开头
+                            if(value.length == 0){
+                                return callback()
+                            }
+                            let reg = /^[1-9][0-9]*$/
+                            if(!reg.test(value)){
+                                return callback('非法输入！');
+                            }
+                            return callback()
+                        }}
+                        ] }]"
                 />
             </a-form-item>
             <a-form-item label="原始价格" v-bind="formItemLayout">
                 <a-input
                         placeholder="请填写原始价格"
-                        v-decorator="['price', { rules: [{ required: true, message: '请输入原始价格' }] }]"
+                        v-decorator="['price', { rules: [{ required: true, message: '请输入原始价格' },
+                        {validator: (_, value, callback) => { //检验输入，输入为正整数或小数
+                            if(value.length == 0){
+                                return callback()
+                            }
+                            let reg =  /^[0-9]+([.]{1}[0-9]+){0,1}$/
+                            if(!reg.test(value)){
+                                return callback('非法输入！');
+                            }
+                            return callback()
+                        }}
+                        ] }]"
                 />
             </a-form-item>
         </a-form>

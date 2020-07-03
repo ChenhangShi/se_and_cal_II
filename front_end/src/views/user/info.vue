@@ -35,7 +35,18 @@
                     <a-form-item label="手机号" :label-col="{ span: 3 }" :wrapper-col="{ span: 8, offset: 1 }">
                         <a-input
                                 placeholder="请填写手机号"
-                                v-decorator="['phoneNumber', { rules: [{ required: true, message: '请输入手机号' }] }]"
+                                v-decorator="['phoneNumber', { rules: [{ required: true, message: '请输入手机号' },
+                                {validator: (_, value, callback) => { //检验输入，输入为正整数
+                                    if(value.length == 0){
+                                        return callback()
+                                    }
+                                    let reg = /^[0-9]*$/
+                                    if(!reg.test(value)){
+                                        return callback('非法输入！');
+                                    }
+                                    return callback()
+                                }}
+                                ] }]"
                                 v-if="modify"
                         />
                         <span v-else>{{ userInfo.phoneNumber}}</span>

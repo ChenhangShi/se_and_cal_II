@@ -74,7 +74,7 @@
         <AddCoupon></AddCoupon>
         <SelectRestoreMethodModal></SelectRestoreMethodModal>
         <AddCreditModal :curUserId="curUserId"></AddCreditModal>
-        <ChangeLevelRulesModal :levelRecord="curLevelRecord" :memberLevelInfo="memberLevelInfo"></ChangeLevelRulesModal>
+        <ChangeLevelRulesModal :levelRecord="curLevelRecord" :memberLevelInfo="memberLevelInfo" :disabled="changeLevelRulesDisabled" v-on:getFromSon="getFromSon"></ChangeLevelRulesModal>
     </div>
 </template>
 
@@ -212,6 +212,7 @@
                 curUserId: Number, //由于组件比较简单，直接用props传递数据（信用充值时的用户id）
                 //撤销异常订单不用props是因为当时已经在user里面加了一个currentOrder属性，可以直接拿来用
                 curLevelRecord: {},//3.7 储存修改的等级制度表格的某列，用于props
+                changeLevelRulesDisabled: false, //传递给子组件，如果是等级1，拒绝修改信用值
             }
         },
         components: {
@@ -267,9 +268,15 @@
                 this.set_addCreditModalVisible(true)
             },
             //3.7
-            changeLevelRules(record){
+            changeLevelRules(record){ //修改等级规则
                 this.curLevelRecord = record
+                if(Number(record.level) == 1){
+                    this.changeLevelRulesDisabled = true
+                }
                 this.set_changeLevelRulesModalVisible(true)
+            },
+            getFromSon(data){//子组件关闭的时候，重新将changeLevelRulesDisabled设置为false
+                this.changeLevelRulesDisabled = data
             },
         }
     }
