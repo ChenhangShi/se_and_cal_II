@@ -12,6 +12,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * 企业会员酒店合作企业优惠
+ */
+
 @Service
 public class CompanyCouponStrategyImpl implements CouponMatchStrategy {
     @Autowired

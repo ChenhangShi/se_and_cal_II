@@ -9,6 +9,10 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 
+/**
+ * 限时优惠
+ */
+
 @Service
 public class TimeCouponStrategyImpl implements CouponMatchStrategy {
 

@@ -5,6 +5,10 @@ import com.example.hotel.po.Coupon;
 import com.example.hotel.vo.OrderVO;
 import org.springframework.stereotype.Service;
 
+/**
+ * 3间及以上优惠
+ */
+
 @Service
 public class TargetRoomCouponStrategy implements CouponMatchStrategy {
     /**

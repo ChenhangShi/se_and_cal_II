@@ -12,6 +12,10 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+/**
+ * 普通会员生日优惠
+ */
+
 @Service
 public class BirthdayCouponStrategyImpl implements CouponMatchStrategy {
     @Autowired

@@ -7,6 +7,10 @@ import com.example.hotel.vo.HotelTargetMoneyCouponVO;
 import com.example.hotel.vo.OrderVO;
 import org.springframework.stereotype.Service;
 
+/**
+ * 满减优惠
+ */
+
 @Service
 public class TargetMoneyCouponStrategyImpl implements CouponMatchStrategy {
 
