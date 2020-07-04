@@ -120,6 +120,8 @@
             ]),
             cancel() {
                 this.set_addHotelModalVisible(false)
+                this.form.resetFields()
+
             },
             changeStar(v) {
 
@@ -143,6 +145,8 @@
 
                         this.set_addHotelParams(data)
                         this.addHotel()
+                        this.form.resetFields()
+
                     }
                 });
             },
