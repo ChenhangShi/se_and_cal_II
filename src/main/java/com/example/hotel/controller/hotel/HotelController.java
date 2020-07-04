@@ -10,6 +10,10 @@ import com.example.hotel.vo.ResponseVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * 酒店 房间 合作企业 酒店服务 的操作
+ */
+
 @RestController
 @RequestMapping("/api/hotel")
 public class HotelController {
