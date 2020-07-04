@@ -41,8 +41,8 @@
                                         return callback()
                                     }
                                     let reg = /^[0-9]*$/
-                                    if(!reg.test(value)){
-                                        return callback('非法输入！');
+                                    if( value.length!=11||!reg.test(value)){
+                                        return callback('手机号格式错误！');
                                     }
                                     return callback()
                                 }}
