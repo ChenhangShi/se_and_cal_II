@@ -8,8 +8,12 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Base64;
 
-public class Methods {
-    public static String md5Encryption(String src) {
+
+/**
+ * 静态工具方法
+ */
+public interface Methods {
+    static String md5Encryption(String src) {
         try {
             MessageDigest md = MessageDigest.getInstance("md5");
 
@@ -27,13 +31,13 @@ public class Methods {
         return null;// 发生异常返回空
     }
 
-    public static String getTodayStr(){
+    static String getTodayStr(){
         LocalDate today=LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         return formatter.format(today);
     }
 
-    public static String getNowStr(){
+    static String getNowStr(){
         LocalDateTime now=LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         return formatter.format(now);
