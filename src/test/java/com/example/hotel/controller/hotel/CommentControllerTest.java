@@ -1,4 +1,4 @@
-package com.example.hotel.controller.comment;
+package com.example.hotel.controller.hotel;
 
 import com.alibaba.fastjson.JSON;
 import com.example.hotel.HotelApplication;
@@ -50,12 +50,12 @@ public class CommentControllerTest {
     public void testPostComment() throws Exception{
 
         CommentVO commentVO=new CommentVO();
-        commentVO.setHotelId(1);
-        commentVO.setHotelName("汉庭酒店");
-        commentVO.setUserId(5);
-        commentVO.setUserName("测试二号");
-        commentVO.setRate(2);
-        commentVO.setComment("assff");
+        commentVO.setHotelId(3);
+        commentVO.setHotelName("桂圆酒店");
+        commentVO.setUserId(6);
+        commentVO.setUserName("桂圆酒店工作人员");
+        commentVO.setRate(4.5);
+        commentVO.setComment("1");
 
         String json= JSON.toJSONString(commentVO);
 
