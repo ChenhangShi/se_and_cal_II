@@ -1,7 +1,6 @@
 package com.example.hotel.controller.order;
 
 import com.example.hotel.HotelApplication;
-import com.example.hotel.vo.OrderVO;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
