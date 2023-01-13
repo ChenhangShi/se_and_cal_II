@@ -22,22 +22,13 @@ public class CouponServiceImpl implements CouponService {
 
     private final CouponMapper couponMapper;
 
-    private static List<CouponMatchStrategy> strategyList = new ArrayList<>();
+    private final List<CouponMatchStrategy> strategyList;
 
     @Autowired
-    public CouponServiceImpl(TargetMoneyCouponStrategyImpl targetMoneyCouponStrategy,
-                             TimeCouponStrategyImpl timeCouponStrategy,
-                             TargetRoomCouponStrategy targetRoomCouponStrategy,
-                             BirthdayCouponStrategyImpl birthdayCouponStrategy,
-                             CompanyCouponStrategyImpl companyCouponStrategy,
-                             CouponMapper couponMapper) {
+    public CouponServiceImpl(CouponMapper couponMapper,List<CouponMatchStrategy> strategyList) {
         //持有各种优惠策略
         this.couponMapper = couponMapper;
-        strategyList.add(targetMoneyCouponStrategy);
-        strategyList.add(targetRoomCouponStrategy);
-        strategyList.add(timeCouponStrategy);
-        strategyList.add(birthdayCouponStrategy);
-        strategyList.add(companyCouponStrategy);
+        this.strategyList = strategyList;
     }
 
 
