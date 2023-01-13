@@ -20,11 +20,6 @@ import java.util.List;
 public class CouponServiceImpl implements CouponService {
     private final static String ADD_COUPON_ERROR="添加优惠失败";
 
-    private final  TargetMoneyCouponStrategyImpl targetMoneyCouponStrategy;
-    private final  TimeCouponStrategyImpl timeCouponStrategy;
-    private final TargetRoomCouponStrategy targetRoomCouponStrategy;
-    private final BirthdayCouponStrategyImpl birthdayCouponStrategy;
-    private final CompanyCouponStrategyImpl companyCouponStrategy;
     private final CouponMapper couponMapper;
 
     private static List<CouponMatchStrategy> strategyList = new ArrayList<>();
@@ -38,11 +33,6 @@ public class CouponServiceImpl implements CouponService {
                              CouponMapper couponMapper) {
         //持有各种优惠策略
         this.couponMapper = couponMapper;
-        this.targetMoneyCouponStrategy = targetMoneyCouponStrategy;
-        this.targetRoomCouponStrategy = targetRoomCouponStrategy;
-        this.timeCouponStrategy = timeCouponStrategy;
-        this.birthdayCouponStrategy=birthdayCouponStrategy;
-        this.companyCouponStrategy=companyCouponStrategy;
         strategyList.add(targetMoneyCouponStrategy);
         strategyList.add(targetRoomCouponStrategy);
         strategyList.add(timeCouponStrategy);
